@@ -14,24 +14,25 @@ package frc.robot;
  */
 public final class Constants {
 
-    //drivetrain ports
+    //CAN ports
+    public static final int pcm = 0;
     public static final int LFront = 1;
     public static final int LRear = 2;
     public static final int RFront = 3;
     public static final int RRear = 4;
+    public static final int pivotPort = 5;
+    public static final int telescopePort = 6;
 
-    //left encoder
-    public static final int[] LEncoder = new int[] {0, 1};
-    public static final boolean LReverse = false;
+    //solenoids
+    public static final int solenoid1 = 0;
+    public static final int solenoid2 = 1;
 
-    //right encoder
-    public static final int[] REncoder = new int[] {2, 3};
-    public static final boolean RReverse = true;
+    public static final int distancePerPulse = 1;
 
-    public static final int kEncoderCPR = 1024;
-    public static final double kWheelDiameterInches = 6;
-    public static final double kEncoderDistancePerPulse =
-        // Assumes the encoders are directly mounted on the wheel shafts
-        (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+    public static final double telescopeSpeedIn = 0.6;
+    public static final double telescopeSpeedOut = -0.4;
+
+    public static final double pivotSpeedUp = 0.5;
+    public static final double pivotSpeedDown = -0.3;
 
 }
