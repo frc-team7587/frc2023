@@ -4,9 +4,20 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.LimeLight;
+import frc.robot.subsystems.arm;
+import frc.robot.subsystems.claw;
+import frc.robot.subsystems.drivetrain;
+import frc.robot.subsystems.elevator;
+import static frc.robot.Constants.*;
+import frc.robot.commands.drivetrain.*;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -15,10 +26,16 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
 
-  private RobotContainer m_robotContainer;
+  public static final drivetrain m_drive = new drivetrain();
+  public static final AnalogGyro gyro = new AnalogGyro(gyroPort);
+  public static final Joystick logi = new Joystick(0);
+  public static final LimeLight limelight = new LimeLight();
+  public static final arm m_arm = new arm();
+  public static final claw m_claw = new claw();
+  public static final elevator m_elevator = new elevator();
 
+  private Command autonomousCommand;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -27,7 +44,16 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+
+    gyro.calibrate();
+    gyro.reset();
+
+    m_drive.resetEncoders();
+
+    configureButtonBindings();
+
+    m_drive.setDefaultCommand(new defaultDrive(m_drive));
+
   }
 
   /**
@@ -53,14 +79,17 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {}
 
+  private void configureButtonBindings() {
+
+  }
+
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (autonomousCommand != null) {
+      autonomousCommand.schedule();
     }
   }
 
@@ -74,8 +103,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
     }
   }
 

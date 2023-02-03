@@ -3,28 +3,26 @@ package frc.robot.commands.drivetrain;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.drivetrain;
+import frc.robot.Robot;
 
-public class driveStraight extends PIDCommand {
+public class driveTurn extends PIDCommand {
     
-    private final drivetrain m_drive;
-
-    public driveStraight(drivetrain m_drive, double distance) {
+    public driveTurn(drivetrain m_drive, double angle) {
         super(new PIDController(0.01, 0, 0),
         
-            () -> m_drive.getLeftEncoderDistance() - m_drive.getRightEncoderDistance(),
-            distance,
-            (output) -> m_drive.drive(output, 0),
+            () -> Robot.gyro.getAngle(),
+            angle,
+            (output) -> m_drive.drive(0, output),
             m_drive);
         
             getController().enableContinuousInput(-180, 180);
             getController().setTolerance(1, 0);
 
-            this.m_drive = m_drive;
     }
 
     @Override
     public void initialize() {
-        m_drive.resetEncoders();
+        Robot.gyro.reset();
     }
 
     @Override

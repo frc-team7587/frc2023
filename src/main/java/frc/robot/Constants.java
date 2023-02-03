@@ -22,17 +22,37 @@ public final class Constants {
     public static final int RRear = 4;
     public static final int pivotPort = 5;
     public static final int telescopePort = 6;
+    public static final int elevatorPort = 7;
 
-    //solenoids
+    //solenoid ports
     public static final int solenoid1 = 0;
     public static final int solenoid2 = 1;
 
-    public static final int distancePerPulse = 1;
+    //spi ports
+    public static final int gyroPort = 0;
 
+    //targets
+    public static final double telescopeTarget = 4; //the very end of the telescope
+    public static final double pivotTarget = 5;
+
+    //drivetrain encoder calculations
+    public static final double wheelDiameter = 6; //inches
+    public static final double wheelCircumference = wheelDiameter * Math.PI;
+    public static final double encoderCountsPerRev = 42; //Neo Hall Sensor
+    public static final double rotationsPerEncoderCount = 1 / encoderCountsPerRev;
+    public static final double driveGearBoxFactor = 12.75; //toughbox
+    public static final double axelToMotor = 1 / driveGearBoxFactor;
+    public static final double distancePerPulse = wheelCircumference * rotationsPerEncoderCount * axelToMotor;
+
+
+    //motor speeds
     public static final double telescopeSpeedIn = 0.6;
     public static final double telescopeSpeedOut = -0.4;
-
     public static final double pivotSpeedUp = 0.5;
     public static final double pivotSpeedDown = -0.3;
+    public static final double elevatorUp = 0.4;
+    public static final double elevatorDown = -0.2;
+
+
 
 }

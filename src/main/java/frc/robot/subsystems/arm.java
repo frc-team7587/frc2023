@@ -38,6 +38,14 @@ public class arm extends SubsystemBase {
         telescope.set(telescopeSpeedOut);
     }
 
+    public void telescopeStop() {
+        telescope.set(0);
+    }
+
+    public void setTelescope(double speed) {
+        telescope.set(speed);
+    }
+
     public double getTelescope() {
         return telescopeEncoder.getPosition();
     }
@@ -54,6 +62,14 @@ public class arm extends SubsystemBase {
         pivot.set(pivotSpeedDown);
     }
 
+    public void pivotStop() {
+        pivot.set(0);
+    }
+
+    public void setPivot(double speed) {
+        pivot.set(speed);
+    }
+
     public double getPivot() {
         return pivotEncoder.getPosition();
     }
@@ -64,6 +80,6 @@ public class arm extends SubsystemBase {
 
     @Override
     public void periodic() {
-        
+
     }
 }
