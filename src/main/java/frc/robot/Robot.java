@@ -15,7 +15,11 @@ import frc.robot.subsystems.claw;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.elevator;
 import static frc.robot.Constants.*;
+
+import java.text.DecimalFormat;
+
 import frc.robot.commands.drivetrain.*;
+import frc.robot.utilities.BNO055;
 
 
 
@@ -27,13 +31,20 @@ import frc.robot.commands.drivetrain.*;
  */
 public class Robot extends TimedRobot {
 
-  public static final drivetrain m_drive = new drivetrain();
-  public static final AnalogGyro gyro = new AnalogGyro(gyroPort);
+  // public static final drivetrain m_drive = new drivetrain();
+  // public static final AnalogGyro gyro = new AnalogGyro(gyroPort);
   public static final Joystick logi = new Joystick(0);
-  public static final LimeLight limelight = new LimeLight();
-  public static final arm m_arm = new arm();
-  public static final claw m_claw = new claw();
-  public static final elevator m_elevator = new elevator();
+  // public static final LimeLight limelight = new LimeLight();
+  // public static final arm m_arm = new arm();
+  // public static final claw m_claw = new claw();
+  // public static final elevator m_elevator = new elevator();
+  public static BNO055 imu;
+  private BNO055.CalData cal;
+  private DecimalFormat f = new DecimalFormat("+000.000;-000.000");
+  private double[] pos = new double[3]; // [x,y,z] position data
+
+
+
 
   private Command autonomousCommand;
   /**
@@ -44,15 +55,22 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
+				BNO055.vector_type_t.VECTOR_EULER);
+      
+    System.out.println("Sensor present" + imu.isSensorPresent());
+    System.out.println("Initialize complete" + imu.isInitialized());
+    System.out.println("calibrated" + imu.isCalibrated());
 
-    gyro.calibrate();
-    gyro.reset();
 
-    m_drive.resetEncoders();
+    // gyro.calibrate();
+    // gyro.reset();
+
+    // m_drive.resetEncoders();
 
     configureButtonBindings();
 
-    m_drive.setDefaultCommand(new defaultDrive(m_drive));
+    // m_drive.setDefaultCommand(new defaultDrive(m_drive));
 
   }
 
@@ -74,7 +92,28 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    while (isDisabled()) {
+			System.out.println("COMMS: " + imu.isSensorPresent()
+					+ ", INITIALIZED: " + imu.isInitialized()
+					+ ", CALIBRATED: " + imu.isCalibrated());
+			if(imu.isInitialized()){
+				pos = imu.getVector();
+	
+				/* Display the floating point data */
+				System.out.println("\tX: " + f.format(pos[0])
+						+ " Y: " + f.format(pos[1]) + " Z: " + f.format(pos[2])
+						+ "  H: " + imu.getHeading());
+	
+				/* Display calibration status for each sensor. */
+				cal = imu.getCalibration();
+				System.out.println("\tCALIBRATION: Sys=" + cal.sys
+						+ " Gyro=" + cal.gyro + " Accel=" + cal.accel
+						+ " Mag=" + cal.mag);
+			}
+
+    }
+  }
 
   @Override
   public void disabledPeriodic() {}

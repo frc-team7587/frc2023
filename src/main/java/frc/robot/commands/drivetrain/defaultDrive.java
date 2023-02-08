@@ -1,7 +1,7 @@
 package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 import frc.robot.subsystems.drivetrain;
 
 public class defaultDrive extends CommandBase {
@@ -14,7 +14,7 @@ public class defaultDrive extends CommandBase {
 
     @Override
     public void execute() {
-        m_drive.drive(RobotContainer.logi.getY() * RobotContainer.logi.getThrottle(), -RobotContainer.logi.getTwist() * RobotContainer.logi.getThrottle());
+        m_drive.drive(Robot.logi.getY() * Robot.logi.getThrottle(), -Robot.logi.getTwist() * Robot.logi.getThrottle());
     }
 
     @Override
