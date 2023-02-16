@@ -39,7 +39,7 @@ public class arm extends SubsystemBase {
     }
 
     public void telescopeStop() {
-        telescope.set(0);
+        telescope.set(telescopeSpeedStop);
     }
 
     public void setTelescope(double speed) {

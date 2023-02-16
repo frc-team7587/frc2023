@@ -1,19 +1,32 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.SPI.Port;
+import java.nio.charset.Charset;
+
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class marquee extends SubsystemBase{
-    SPI marquee;
+    SerialPort marquee;
 
     public marquee() {
 
-        marquee = new SPI(Port.kOnboardCS0);
+        marquee = new SerialPort(115200, SerialPort.Port.kUSB1, 8, SerialPort.Parity.kNone, SerialPort.StopBits.kOne);
 
     }
 
-    public void displayTeamNumber() {
-        marquee.write(byte[] " 7587|5|0|0|63|0|0|0|0|0\r\n", 28); //need to figure this out
+    public void displayMessage(String message) {
+
+        byte[] toSend = new byte[128];
+
+        for(int i = 0; i<toSend.length; i++) {
+            toSend[i] = 0;
+        }
+        
+        byte[] messageBytes = message.getBytes(Charset.forName("ASCII"));
+        for(int i = 0; i<messageBytes.length; i++) {
+            toSend[i] = messageBytes[i];
+        }
+
+        marquee.writeString(message); //need to figure this out
     }
 }

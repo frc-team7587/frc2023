@@ -7,18 +7,35 @@ package frc.robot;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.arm;
 import frc.robot.subsystems.claw;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.elevator;
+import frc.robot.subsystems.marquee;
+
 import static frc.robot.Constants.*;
 
 import java.text.DecimalFormat;
 
+import frc.robot.commands.arm.pivotDown;
+import frc.robot.commands.arm.pivotUp;
+import frc.robot.commands.arm.telescopeIn;
+import frc.robot.commands.arm.telescopeOut;
+import frc.robot.commands.claw.clawIn;
+import frc.robot.commands.claw.clawOut;
+
 import frc.robot.commands.drivetrain.*;
+import frc.robot.commands.elevator.elevatorDown;
+import frc.robot.commands.elevator.elevatorUp;
+import frc.robot.commands.marquee.display7587;
 import frc.robot.utilities.BNO055;
 
 
@@ -34,6 +51,12 @@ public class Robot extends TimedRobot {
   // public static final drivetrain m_drive = new drivetrain();
   // public static final AnalogGyro gyro = new AnalogGyro(gyroPort);
   public static final Joystick logi = new Joystick(0);
+  public static final XboxController  xbox = new XboxController(1);
+  public static final marquee m_marquee = new marquee();
+  // public static final claw m_claw = new claw();
+  public static final elevator elevator = new elevator();
+  // public static final arm arm = new arm();
+  
   // public static final LimeLight limelight = new LimeLight();
   // public static final arm m_arm = new arm();
   // public static final claw m_claw = new claw();
@@ -70,6 +93,7 @@ public class Robot extends TimedRobot {
 
     configureButtonBindings();
 
+    m_marquee.setDefaultCommand(new display7587(m_marquee));
     // m_drive.setDefaultCommand(new defaultDrive(m_drive));
 
   }
@@ -93,34 +117,59 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    while (isDisabled()) {
-			System.out.println("COMMS: " + imu.isSensorPresent()
-					+ ", INITIALIZED: " + imu.isInitialized()
-					+ ", CALIBRATED: " + imu.isCalibrated());
-			if(imu.isInitialized()){
-				pos = imu.getVector();
+    // while (isDisabled()) {
+		// 	System.out.println("COMMS: " + imu.isSensorPresent()
+		// 			+ ", INITIALIZED: " + imu.isInitialized()
+		// 			+ ", CALIBRATED: " + imu.isCalibrated());
+		// 	if(imu.isInitialized()){
+		// 		pos = imu.getVector();
 	
-				/* Display the floating point data */
-				System.out.println("\tX: " + f.format(pos[0])
-						+ " Y: " + f.format(pos[1]) + " Z: " + f.format(pos[2])
-						+ "  H: " + imu.getHeading());
+		// 		/* Display the floating point data */
+		// 		System.out.println("\tX: " + f.format(pos[0])
+		// 				+ " Y: " + f.format(pos[1]) + " Z: " + f.format(pos[2])
+		// 				+ "  H: " + imu.getHeading());
 	
-				/* Display calibration status for each sensor. */
-				cal = imu.getCalibration();
-				System.out.println("\tCALIBRATION: Sys=" + cal.sys
-						+ " Gyro=" + cal.gyro + " Accel=" + cal.accel
-						+ " Mag=" + cal.mag);
-			}
+		// 		/* Display calibration status for each sensor. */
+		// 		cal = imu.getCalibration();
+		// 		System.out.println("\tCALIBRATION: Sys=" + cal.sys
+		// 				+ " Gyro=" + cal.gyro + " Accel=" + cal.accel
+		// 				+ " Mag=" + cal.mag);
+		// 	}
 
-    }
+    // }
   }
 
   @Override
   public void disabledPeriodic() {}
 
   private void configureButtonBindings() {
+    new JoystickButton(xbox, Button.kY.value)
+      .whileTrue(new elevatorUp(elevator));
+      new JoystickButton(xbox, Button.kA.value)
+      .whileTrue(new elevatorDown(elevator));
 
-  }
+    // new JoystickButton(xbox, Button.kX.value)
+    //   .onTrue(new display7587(m_marquee));
+
+    // new JoystickButton(xbox, Button.kY.value)
+    //   .whileTrue(new pivotDown(arm));
+
+    // new JoystickButton(xbox, Button.kX.value)
+    //   .whileTrue(new pivotUp(arm));
+
+    // new JoystickButton(xbox, Button.kLeftBumper.value)
+    //   .whileTrue(new telescopeIn(arm));
+
+    // new JoystickButton(xbox, Button.kRightBumper.value)
+    //   .whileTrue(new telescopeOut(arm));
+    //   new JoystickButton(xbox, Button.kY.value)
+    //   .onTrue(new clawIn(m_claw));
+
+    // new JoystickButton(xbox, Button.kX.value)
+    //   .onTrue(new clawOut(m_claw));
+
+
+    }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override

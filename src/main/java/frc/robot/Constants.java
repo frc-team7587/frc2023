@@ -19,10 +19,11 @@ public final class Constants {
     public static final int LFront = 1;
     public static final int LRear = 2;
     public static final int RFront = 3;
-    public static final int RRear = 4;
-    public static final int pivotPort = 5;
-    public static final int telescopePort = 6;
-    public static final int elevatorPort = 7;
+    public static final int RRear = 6;
+    public static final int pivotPort = 2;
+    public static final int telescopePort = 1;
+    public static final int elevatorPort1 = 1;
+    public static final int elevatorPort2 = 2;
 
     //solenoid ports
     public static final int solenoid1 = 0;
@@ -46,12 +47,15 @@ public final class Constants {
 
 
     //motor speeds
-    public static final double telescopeSpeedIn = 0.6;
-    public static final double telescopeSpeedOut = -0.4;
-    public static final double pivotSpeedUp = 0.5;
-    public static final double pivotSpeedDown = -0.3;
-    public static final double elevatorUp = 0.4;
-    public static final double elevatorDown = -0.2;
+    public static final double telescopeSpeedIn = 0.2;
+    public static final double telescopeSpeedOut = -0.2;
+    public static final double telescopeSpeedStop = 0;
+
+    public static final double pivotSpeedUp = -0.5;
+    public static final double pivotSpeedDown = 0.3;
+    public static final double elevatorUp = 0.2;
+    public static final double elevatorDown = -0.2
+    ;
 
 
 

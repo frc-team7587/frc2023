@@ -12,40 +12,60 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class elevator extends SubsystemBase {
     
-    private final CANSparkMax elevator;
+    private final CANSparkMax elevator1;
+    private final CANSparkMax elevator2;
 
-    private final RelativeEncoder elevatorEncoder;
+
+    private final RelativeEncoder elevatorEncoder1;
+    private final RelativeEncoder elevatorEncoder2;
+
 
     public elevator() {
         
-        elevator = new CANSparkMax(elevatorPort, MotorType.kBrushless);
-        elevator.setIdleMode(IdleMode.kBrake);
+        elevator1 = new CANSparkMax(elevatorPort1, MotorType.kBrushless);
+        elevator2 = new CANSparkMax(elevatorPort2, MotorType.kBrushless);
 
-        elevatorEncoder = elevator.getEncoder();
+        elevator1.setIdleMode(IdleMode.kBrake);
+        elevator2.setIdleMode(IdleMode.kBrake);
+        
+        elevatorEncoder1 = elevator1.getEncoder();
+        elevatorEncoder2 = elevator2.getEncoder();
 
     }
 
     public void elevatorUp() {
-        elevator.set(elevatorUp);
+        elevator1.set(elevatorUp);
+        elevator2.set(elevatorUp);
+
     }
 
     public void elevatorDown() {
-        elevator.set(elevatorDown);
+        elevator1.set(elevatorDown);
+        elevator2.set(elevatorDown);
+
     }
 
     public void elevatorStop() {
-        elevator.set(0);
+        elevator1.set(0);
+        elevator2.set(0);
+
     }
 
     public void setElevator(double speed) {
-        elevator.set(speed);
+        elevator1.set(speed);
+
+        elevator2.set(speed);
     }
 
     public double getElevator() {
-        return elevatorEncoder.getPosition();
+        // return elevatorEncoder1.getPosition();
+        // return elevatorEncoder2.getPosition();
+return (Double) null;
     }
 
     public void resetElevator() {
-        elevatorEncoder.setPosition(0);
+        elevatorEncoder1.setPosition(0);
+        elevatorEncoder2.setPosition(0);
+
     } 
 }
