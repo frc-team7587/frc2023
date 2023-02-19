@@ -32,6 +32,14 @@ public final class Constants {
     //spi ports
     public static final int gyroPort = 0;
 
+    //photon
+    public static final String cameraName = "OV5647";
+    public static final double CAMERA_PITCH_RADIANS = 0;
+    public static final double CAMERA_HEIGHT_METERS = 1;
+    public static final double TARGET_HEIGHT_METERS = 1;
+    public static final int aprilPipeline = 0;
+    public static final int reflectivePipeline = 1;
+
     //targets
     public static final double telescopeTarget = 4; //the very end of the telescope
     public static final double pivotTarget = 5;
@@ -53,8 +61,8 @@ public final class Constants {
 
     public static final double pivotSpeedUp = -0.5;
     public static final double pivotSpeedDown = 0.3;
-    public static final double elevatorUp = 0.2;
-    public static final double elevatorDown = -0.2
+    public static final double elevatorUp = 0.1;
+    public static final double elevatorDown = -0.1
     ;
 
 

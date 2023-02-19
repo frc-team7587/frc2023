@@ -7,7 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import static frc.robot.Constants.*;
 
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class elevator extends SubsystemBase {
@@ -27,7 +27,7 @@ public class elevator extends SubsystemBase {
 
         elevator1.setIdleMode(IdleMode.kBrake);
         elevator2.setIdleMode(IdleMode.kBrake);
-        
+
         elevatorEncoder1 = elevator1.getEncoder();
         elevatorEncoder2 = elevator2.getEncoder();
 
@@ -58,9 +58,8 @@ public class elevator extends SubsystemBase {
     }
 
     public double getElevator() {
-        // return elevatorEncoder1.getPosition();
+        return elevatorEncoder1.getPosition();
         // return elevatorEncoder2.getPosition();
-return (Double) null;
     }
 
     public void resetElevator() {
@@ -68,4 +67,9 @@ return (Double) null;
         elevatorEncoder2.setPosition(0);
 
     } 
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Elevator", getElevator());
+    }
 }

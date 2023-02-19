@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -20,6 +21,7 @@ import frc.robot.subsystems.claw;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.elevator;
 import frc.robot.subsystems.marquee;
+import frc.robot.subsystems.photon;
 
 import static frc.robot.Constants.*;
 
@@ -52,12 +54,12 @@ public class Robot extends TimedRobot {
   // public static final AnalogGyro gyro = new AnalogGyro(gyroPort);
   public static final Joystick logi = new Joystick(0);
   public static final XboxController  xbox = new XboxController(1);
-  public static final marquee m_marquee = new marquee();
+  // public static final marquee m_marquee = new marquee();
   // public static final claw m_claw = new claw();
   public static final elevator elevator = new elevator();
   // public static final arm arm = new arm();
   
-  // public static final LimeLight limelight = new LimeLight();
+  public static final photon photon = new photon();
   // public static final arm m_arm = new arm();
   // public static final claw m_claw = new claw();
   // public static final elevator m_elevator = new elevator();
@@ -93,7 +95,7 @@ public class Robot extends TimedRobot {
 
     configureButtonBindings();
 
-    m_marquee.setDefaultCommand(new display7587(m_marquee));
+    // m_marquee.setDefaultCommand(new display7587(m_marquee));
     // m_drive.setDefaultCommand(new defaultDrive(m_drive));
 
   }
@@ -111,6 +113,7 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+    SmartDashboard.putNumber("Gyro", imu.getHeading());
     CommandScheduler.getInstance().run();
   }
 

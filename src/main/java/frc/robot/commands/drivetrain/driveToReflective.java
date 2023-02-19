@@ -3,27 +3,24 @@ package frc.robot.commands.drivetrain;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.drivetrain;
+import frc.robot.Robot;
 
-public class driveStraight extends PIDCommand {
+public class driveToReflective extends PIDCommand {
     
-    private final drivetrain m_drive;
-
-    public driveStraight(drivetrain m_drive, double distance) {
+    public driveToReflective(drivetrain m_drive) {
         super(new PIDController(0.01, 0, 0),
         
-            () -> m_drive.getAverageDistance(),
-            distance,
+            () -> Robot.photon.getReflectiveDistance(),
+            0.5, //how far we want to be from reflective tape in meters
             (output) -> m_drive.drive(output, 0),
             m_drive);
         
             getController().setTolerance(1, 0);
 
-            this.m_drive = m_drive;
     }
 
     @Override
     public void initialize() {
-        m_drive.resetEncoders();
     }
 
     @Override
