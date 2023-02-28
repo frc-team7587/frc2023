@@ -61,8 +61,8 @@ public final class Constants {
 
     public static final double pivotSpeedUp = -0.5;
     public static final double pivotSpeedDown = 0.3;
-    public static final double elevatorUp = 0.1;
-    public static final double elevatorDown = -0.1
+    public static final double elevatorUp = -0.2;
+    public static final double elevatorDown = 0.1;
     ;
 
 

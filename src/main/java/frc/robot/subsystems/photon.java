@@ -15,6 +15,18 @@ public class photon extends SubsystemBase {
     private double yDistance;
     private double zDistance;
 
+    public void isConnected() {
+        System.out.println("Camera connected: " + camera.isConnected());
+    }
+
+    public void setReflective() {
+        camera.setPipelineIndex(reflectivePipeline);
+    }
+
+    public void setApril() {
+        camera.setPipelineIndex(aprilPipeline);
+    }
+
     public double getAprilYaw() {
 
         camera.setPipelineIndex(aprilPipeline);
