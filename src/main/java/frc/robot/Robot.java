@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -26,11 +28,15 @@ import frc.robot.subsystems.photon;
 import static frc.robot.Constants.*;
 
 import java.text.DecimalFormat;
+import java.util.concurrent.TimeUnit;
 
 import frc.robot.commands.arm.pivotDown;
+import frc.robot.commands.arm.pivotGoTo;
 import frc.robot.commands.arm.pivotUp;
+import frc.robot.commands.arm.telescopeGoTo;
 import frc.robot.commands.arm.telescopeIn;
 import frc.robot.commands.arm.telescopeOut;
+import frc.robot.commands.auto.autonomous;
 import frc.robot.commands.claw.clawIn;
 import frc.robot.commands.claw.clawOut;
 
@@ -50,34 +56,38 @@ import frc.robot.utilities.BNO055;
  */
 public class Robot extends TimedRobot {
 
-  // public static final drivetrain m_drive = new drivetrain();
-  // public static final AnalogGyro gyro = new AnalogGyro(gyroPort);
+  public static final drivetrain m_drive = new drivetrain();
   public static final Joystick logi = new Joystick(0);
   public static final XboxController  xbox = new XboxController(1);
   // public static final marquee m_marquee = new marquee();
-  // public static final claw m_claw = new claw();
+  public static final claw m_claw = new claw();
   public static final elevator elevator = new elevator();
-  // public static final arm arm = new arm();
+  public static final arm m_arm = new arm();
   
   public static final photon photon = new photon();
-  // public static final arm m_arm = new arm();
-  // public static final claw m_claw = new claw();
-  // public static final elevator m_elevator = new elevator();
+
   public static BNO055 imu;
   private BNO055.CalData cal;
   private DecimalFormat f = new DecimalFormat("+000.000;-000.000");
   private double[] pos = new double[3]; // [x,y,z] position data
+  private autonomous auto = new autonomous();
+
+  public final static SendableChooser<String> m_chooser = new SendableChooser<>();
 
 
-
-
-  private Command autonomousCommand;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   @Override
   public void robotInit() {
+    m_chooser.setDefaultOption("Easy", "Easy");
+    m_chooser.addOption("Pop and Lock", "Pop and Lock");
+    m_chooser.addOption("Jackpot", "Jackpot");
+    m_chooser.addOption("Set Up", "Set Up");
+    m_chooser.addOption("Zoomies", "Zoomies");
+    SmartDashboard.putData(m_chooser);
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
@@ -87,11 +97,7 @@ public class Robot extends TimedRobot {
     System.out.println("Initialize complete" + imu.isInitialized());
     System.out.println("calibrated" + imu.isCalibrated());
 
-
-    // gyro.calibrate();
-    // gyro.reset();
-
-    // m_drive.resetEncoders();
+    m_drive.resetEncoders();
 
     configureButtonBindings();
 
@@ -109,10 +115,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-    // commands, running already-scheduled commands, removing finished or interrupted commands,
-    // and running subsystem periodic() methods.  This must be called from the robot's periodic
-    // block in order for anything in the Command-based framework to work.
+
     SmartDashboard.putNumber("Gyro", imu.getHeading());
     CommandScheduler.getInstance().run();
   }
@@ -148,39 +151,35 @@ public class Robot extends TimedRobot {
   private void configureButtonBindings() {
     new JoystickButton(xbox, Button.kY.value)
       .whileTrue(new elevatorUp(elevator));
-      new JoystickButton(xbox, Button.kA.value)
+    
+    new JoystickButton(xbox, Button.kA.value)
       .whileTrue(new elevatorDown(elevator));
 
-    // new JoystickButton(xbox, Button.kX.value)
-    //   .onTrue(new display7587(m_marquee));
+    new JoystickButton(xbox, Button.kY.value)
+      .whileTrue(new pivotDown(m_arm));
 
-    // new JoystickButton(xbox, Button.kY.value)
-    //   .whileTrue(new pivotDown(arm));
+    new JoystickButton(xbox, Button.kX.value)
+      .whileTrue(new pivotUp(m_arm));
 
-    // new JoystickButton(xbox, Button.kX.value)
-    //   .whileTrue(new pivotUp(arm));
+    new JoystickButton(xbox, Button.kLeftBumper.value)
+      .whileTrue(new telescopeIn(m_arm));
 
-    // new JoystickButton(xbox, Button.kLeftBumper.value)
-    //   .whileTrue(new telescopeIn(arm));
+    new JoystickButton(xbox, Button.kRightBumper.value)
+      .whileTrue(new telescopeOut(m_arm));
 
-    // new JoystickButton(xbox, Button.kRightBumper.value)
-    //   .whileTrue(new telescopeOut(arm));
-    //   new JoystickButton(xbox, Button.kY.value)
-    //   .onTrue(new clawIn(m_claw));
+    new JoystickButton(xbox, Button.kY.value)
+      .onTrue(new clawIn(m_claw));
 
-    // new JoystickButton(xbox, Button.kX.value)
-    //   .onTrue(new clawOut(m_claw));
-
+    new JoystickButton(xbox, Button.kX.value)
+      .onTrue(new clawOut(m_claw));
 
     }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-
-    // schedule the autonomous command (example)
-    if (autonomousCommand != null) {
-      autonomousCommand.schedule();
+    if (auto.getCommand() != null) {
+      auto.getCommand().schedule();
     }
   }
 
@@ -194,8 +193,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (autonomousCommand != null) {
-      autonomousCommand.cancel();
+    if (auto.getCommand() != null) {
+      auto.getCommand().cancel();
     }
   }
 

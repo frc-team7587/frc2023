@@ -16,14 +16,15 @@ public final class Constants {
 
     //CAN ports
     public static final int pcm = 0;
-    public static final int LFront = 1;
-    public static final int LRear = 2;
-    public static final int RFront = 3;
-    public static final int RRear = 6;
-    public static final int pivotPort = 2;
-    public static final int telescopePort = 1;
-    public static final int elevatorPort1 = 1;
-    public static final int elevatorPort2 = 2;
+    public static final int RFront = 1;
+    public static final int RRear = 2;
+    public static final int LFront = 3;
+    public static final int LRear = 4;
+    public static final int elevatorPort1 = 5;
+    public static final int elevatorPort2 = 6;
+    public static final int pivotPort = 7;
+    public static final int telescopePort = 8;
+
 
     //solenoid ports
     public static final int solenoid1 = 0;
@@ -52,7 +53,6 @@ public final class Constants {
     public static final double driveGearBoxFactor = 12.75; //toughbox
     public static final double axelToMotor = 1 / driveGearBoxFactor;
     public static final double distancePerPulse = wheelCircumference * rotationsPerEncoderCount * axelToMotor;
-
 
     //motor speeds
     public static final double telescopeSpeedIn = 0.2;
