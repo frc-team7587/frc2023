@@ -2,28 +2,29 @@ package frc.robot.commands.auto;
 import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class autonomous {
     String choice;
     public autonomous(){
     }
     public Command getCommand() {
-        Command cmd = null;
+        CommandBase cmd = null;
         switch(Robot.m_chooser.getSelected()) {
             case "Easy":
-            new easy();
+            cmd = new easy();
 
             case "Pop and Lock":
-            new popAndLock();
+            cmd = new popAndLock();
 
             case "Jackpot":
-            new jackpot();
+            cmd = new jackpot();
 
             case "Set Up":
-            new setUp();
+            cmd = new setUp();
 
             case "Zoomies":
-            new zoomies();
+            cmd = new zoomies();
 
             break;
         }
