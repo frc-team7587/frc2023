@@ -8,7 +8,7 @@ import frc.robot.commands.arm.telescopeGoTo;
 public class popAndLock extends SequentialCommandGroup{
     public popAndLock() {
         addCommands(
-        new telescopeGoTo(Robot.m_arm, 0.5),
-        new telescopeGoTo(Robot.m_arm, 0));
+        new telescopeGoTo(Robot.m_telescope, 0.5),
+        new telescopeGoTo(Robot.m_telescope, 0));
     }
 }

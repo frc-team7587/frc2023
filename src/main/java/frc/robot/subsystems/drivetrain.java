@@ -75,7 +75,7 @@ public class drivetrain extends SubsystemBase {
 
     public int getRightEncoder() {
 
-        return (int) ((rightFrontEncoder.getPosition() + rightRearEncoder.getPosition()) / 2);
+        return (int) -((rightFrontEncoder.getPosition() + rightRearEncoder.getPosition()) / 2);
     }
 
     public double getLeftEncoderDistance() {

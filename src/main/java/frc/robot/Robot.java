@@ -14,11 +14,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.LimeLight;
-import frc.robot.subsystems.arm;
+import frc.robot.subsystems.pivot;
+import frc.robot.subsystems.telescope;
 import frc.robot.subsystems.claw;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.elevator;
@@ -39,9 +42,10 @@ import frc.robot.commands.arm.telescopeOut;
 import frc.robot.commands.auto.autonomous;
 import frc.robot.commands.claw.clawIn;
 import frc.robot.commands.claw.clawOut;
-
+import frc.robot.commands.combos.reset;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.elevator.elevatorDown;
+import frc.robot.commands.elevator.elevatorGoTo;
 import frc.robot.commands.elevator.elevatorUp;
 import frc.robot.commands.marquee.display7587;
 import frc.robot.utilities.BNO055;
@@ -62,9 +66,10 @@ public class Robot extends TimedRobot {
   // public static final marquee m_marquee = new marquee();
   public static final claw m_claw = new claw();
   public static final elevator elevator = new elevator();
-  public static final arm m_arm = new arm();
+  public static final pivot m_pivot = new pivot();
+  public static final telescope m_telescope = new telescope();
   
-  public static final photon photon = new photon();
+  // public static final photon photon = new photon();
 
   public static BNO055 imu;
   private BNO055.CalData cal;
@@ -98,11 +103,14 @@ public class Robot extends TimedRobot {
     System.out.println("calibrated" + imu.isCalibrated());
 
     m_drive.resetEncoders();
+    m_telescope.resetTelescope();
+    m_pivot.resetPivot();
+    elevator.resetElevator();
 
     configureButtonBindings();
 
     // m_marquee.setDefaultCommand(new display7587(m_marquee));
-    // m_drive.setDefaultCommand(new defaultDrive(m_drive));
+    m_drive.setDefaultCommand(new defaultDrive(m_drive));
 
   }
 
@@ -118,6 +126,9 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Gyro", imu.getHeading());
     CommandScheduler.getInstance().run();
+    System.out.println("Pivot: " + m_pivot.getPivot());
+    System.out.println("Tele: " + m_telescope.getTelescope());
+    System.out.println("Elevator: " + elevator.getElevator());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -155,23 +166,43 @@ public class Robot extends TimedRobot {
     new JoystickButton(xbox, Button.kA.value)
       .whileTrue(new elevatorDown(elevator));
 
-    new JoystickButton(xbox, Button.kY.value)
-      .whileTrue(new pivotDown(m_arm));
+    new JoystickButton(xbox, Button.kB.value)
+      .onTrue(new driveStraight(m_drive, 24));
+
+    // new JoystickButton(xbox, Button.kB.value)
+    //   .whileTrue(new pivotDown(m_pivot));
 
     new JoystickButton(xbox, Button.kX.value)
-      .whileTrue(new pivotUp(m_arm));
+      .whileTrue(new pivotUp(m_pivot));
+    // new JoystickButton(xbox, Button.kX.value)
+    //   .onTrue(new telescopeGoTo(m_arm, telescopeTarget));
+
+      // new JoystickButton(xbox, Button.kA.value)
+      // .onTrue(new telescopeGoTo(m_arm, 0));
 
     new JoystickButton(xbox, Button.kLeftBumper.value)
-      .whileTrue(new telescopeIn(m_arm));
+      .whileTrue(new telescopeIn(m_telescope));
 
     new JoystickButton(xbox, Button.kRightBumper.value)
-      .whileTrue(new telescopeOut(m_arm));
+      .whileTrue(new telescopeOut(m_telescope));
 
-    new JoystickButton(xbox, Button.kY.value)
-      .onTrue(new clawIn(m_claw));
+    new JoystickButton(xbox, Button.kStart.value)
+      .whileTrue(new reset());
+    
+      //home
+    new JoystickButton(xbox, Button.kBack.value)
+      .onTrue(Commands.parallel(new elevatorGoTo(elevator, 0), new telescopeGoTo(m_telescope, 0), new pivotGoTo(m_pivot, 0)));
+    //mid rung - left joystick
+      new JoystickButton(xbox, 9)
+      .onTrue(Commands.parallel(new elevatorGoTo(elevator, elevatorMidCone), new telescopeGoTo(m_telescope, telescopeMidCone), new pivotGoTo(m_pivot, pivotMidCone)));
+    //high rung - right joystick
+    new JoystickButton(xbox, 10)
+      .onTrue(Commands.parallel(new elevatorGoTo(elevator, elevatorHighCone), new telescopeGoTo(m_telescope, telescopeHighCone), new pivotGoTo(m_pivot, pivotHighCone)));
+    // new JoystickButton(xbox, Button.kY.value)
+    //   .onTrue(new clawIn(m_claw));
 
-    new JoystickButton(xbox, Button.kX.value)
-      .onTrue(new clawOut(m_claw));
+    // new JoystickButton(xbox, Button.kX.value)
+    //   .onTrue(new clawOut(m_claw));
 
     }
 

@@ -1,24 +1,24 @@
 package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.arm;
+import frc.robot.subsystems.telescope;
 
 public class telescopeIn extends CommandBase {
     
-    private final arm arm;
+    private final telescope telescope;
 
-    public telescopeIn(arm subsystem) {
+    public telescopeIn(telescope subsystem) {
         addRequirements(subsystem);
-        arm = subsystem;
+        telescope = subsystem;
     }
 
     @Override
     public void execute() {
-        arm.telescopeIn();
+        telescope.telescopeIn();
     }
 
     @Override
     public void end(boolean interrupted) {
-        arm.telescopeStop();
+        telescope.telescopeStop();
     }
 }

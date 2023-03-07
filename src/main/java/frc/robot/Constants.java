@@ -42,8 +42,24 @@ public final class Constants {
     public static final int reflectivePipeline = 1;
 
     //targets
-    public static final double telescopeTarget = 4; //the very end of the telescope
-    public static final double pivotTarget = 5;
+    public static final double telescopeMax = -68; //the very end of the telescope
+    public static final double pivotTargetMax = 5;
+    public static final double elevatorMax = -24.8;
+
+    //cone low rung
+    public static final double telescopeLowCone = -21.5;
+    public static final double pivotLowCone = 186.1;
+    public static final double elevatorLowCone = -21.5;
+
+    //cone middle rung
+    public static final double telescopeMidCone = -42.2;
+    public static final double pivotMidCone = 48.4;
+    public static final double elevatorMidCone = 0;
+
+    //cone high rung
+    public static final double telescopeHighCone = -64;
+    public static final double pivotHighCone = 91.5;
+    public static final double elevatorHighCone = -24.7;
 
     //drivetrain encoder calculations
     public static final double wheelDiameter = 6; //inches

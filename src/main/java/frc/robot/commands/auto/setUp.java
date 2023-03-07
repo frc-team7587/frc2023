@@ -14,7 +14,7 @@ public class setUp extends SequentialCommandGroup{
         addCommands(
         new driveStraight(Robot.m_drive, -60.69),
         new driveTurn(Robot.m_drive, 180),
-        new pivotGoTo(Robot.m_arm, 0.5),
+        new pivotGoTo(Robot.m_pivot, 0.5),
         new clawIn(Robot.m_claw),
         new clawOut(Robot.m_claw));
     }
