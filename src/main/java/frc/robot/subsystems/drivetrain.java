@@ -79,11 +79,11 @@ public class drivetrain extends SubsystemBase {
     }
 
     public double getLeftEncoderDistance() {
-        return getLeftEncoder() * distancePerPulse;
+        return getLeftEncoder() * metersPerPulse;
     }
 
     public double getRightEncoderDistance() {
-        return getRightEncoder() * distancePerPulse;
+        return getRightEncoder() * metersPerPulse;
     }
 
     public double getAverageDistance() {

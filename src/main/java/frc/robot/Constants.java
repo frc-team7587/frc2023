@@ -62,13 +62,13 @@ public final class Constants {
     public static final double elevatorHighCone = -24.7;
 
     //drivetrain encoder calculations
-    public static final double wheelDiameter = 6; //inches
+    public static final double wheelDiameter = 0.03; //meters
     public static final double wheelCircumference = wheelDiameter * Math.PI;
     public static final double encoderCountsPerRev = 42; //Neo Hall Sensor
     public static final double rotationsPerEncoderCount = 1 / encoderCountsPerRev;
     public static final double driveGearBoxFactor = 12.75; //toughbox
     public static final double axelToMotor = 1 / driveGearBoxFactor;
-    public static final double distancePerPulse = wheelCircumference * rotationsPerEncoderCount * axelToMotor;
+    public static final double metersPerPulse = wheelCircumference * rotationsPerEncoderCount * axelToMotor;
 
     //motor speeds
     public static final double telescopeSpeedIn = 0.2;

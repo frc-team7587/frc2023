@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -12,15 +11,11 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.pivot;
+import frc.robot.subsystems.rgb;
 import frc.robot.subsystems.telescope;
 import frc.robot.subsystems.claw;
 import frc.robot.subsystems.drivetrain;
@@ -31,8 +26,6 @@ import frc.robot.subsystems.photon;
 import static frc.robot.Constants.*;
 
 import java.text.DecimalFormat;
-import java.util.concurrent.TimeUnit;
-
 import frc.robot.commands.arm.pivotDown;
 import frc.robot.commands.arm.pivotGoTo;
 import frc.robot.commands.arm.pivotUp;
@@ -49,6 +42,7 @@ import frc.robot.commands.elevator.elevatorGoTo;
 import frc.robot.commands.elevator.elevatorUp;
 import frc.robot.commands.marquee.display7587;
 import frc.robot.utilities.BNO055;
+import frc.robot.commands.rgb.*;
 
 
 
@@ -65,20 +59,25 @@ public class Robot extends TimedRobot {
   public static final XboxController  xbox = new XboxController(1);
   // public static final marquee m_marquee = new marquee();
   public static final claw m_claw = new claw();
-  public static final elevator elevator = new elevator();
+  public static final elevator m_elevator = new elevator();
   public static final pivot m_pivot = new pivot();
   public static final telescope m_telescope = new telescope();
-  
   // public static final photon photon = new photon();
+
+  public static final rgb m_underglow = new rgb(0, 300);
+  public static final rgb m_upperLeft = new rgb(1, 144);
+  public static final rgb m_lowerLeft = new rgb(2, 144);
+  public static final rgb m_upperRight = new rgb(3, 144);
+  public static final rgb m_lowerRight = new rgb(4, 144);
 
   public static BNO055 imu;
   private BNO055.CalData cal;
   private DecimalFormat f = new DecimalFormat("+000.000;-000.000");
-  private double[] pos = new double[3]; // [x,y,z] position data
+  public static double[] pos = new double[3];; // [x,y,z] position data
   private autonomous auto = new autonomous();
 
   public final static SendableChooser<String> m_chooser = new SendableChooser<>();
-
+  public final static SendableChooser<String> m_teamColorChooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -93,19 +92,20 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Zoomies", "Zoomies");
     SmartDashboard.putData(m_chooser);
 
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
-    imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
-				BNO055.vector_type_t.VECTOR_EULER);
-      
+    m_teamColorChooser.setDefaultOption("Blue", "Blue");
+    m_teamColorChooser.setDefaultOption("Red", "Red");
+    SmartDashboard.putData(m_teamColorChooser);
+
     System.out.println("Sensor present" + imu.isSensorPresent());
     System.out.println("Initialize complete" + imu.isInitialized());
     System.out.println("calibrated" + imu.isCalibrated());
+    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+    // autonomous chooser on the dashboard.
 
     m_drive.resetEncoders();
     m_telescope.resetTelescope();
     m_pivot.resetPivot();
-    elevator.resetElevator();
+    m_elevator.resetElevator();
 
     configureButtonBindings();
 
@@ -128,7 +128,9 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     System.out.println("Pivot: " + m_pivot.getPivot());
     System.out.println("Tele: " + m_telescope.getTelescope());
-    System.out.println("Elevator: " + elevator.getElevator());
+    System.out.println("Elevator: " + m_elevator.getElevator());
+
+    pos = imu.getVector();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -161,10 +163,10 @@ public class Robot extends TimedRobot {
 
   private void configureButtonBindings() {
     new JoystickButton(xbox, Button.kY.value)
-      .whileTrue(new elevatorUp(elevator));
+      .whileTrue(new elevatorUp(m_elevator));
     
     new JoystickButton(xbox, Button.kA.value)
-      .whileTrue(new elevatorDown(elevator));
+      .whileTrue(new elevatorDown(m_elevator));
 
     new JoystickButton(xbox, Button.kB.value)
       .onTrue(new driveStraight(m_drive, 24));
@@ -191,13 +193,13 @@ public class Robot extends TimedRobot {
     
       //home
     new JoystickButton(xbox, Button.kBack.value)
-      .onTrue(Commands.parallel(new elevatorGoTo(elevator, 0), new telescopeGoTo(m_telescope, 0), new pivotGoTo(m_pivot, 0)));
+      .onTrue(Commands.parallel(new elevatorGoTo(m_elevator, 0), new telescopeGoTo(m_telescope, 0), new pivotGoTo(m_pivot, 0)));
     //mid rung - left joystick
       new JoystickButton(xbox, 9)
-      .onTrue(Commands.parallel(new elevatorGoTo(elevator, elevatorMidCone), new telescopeGoTo(m_telescope, telescopeMidCone), new pivotGoTo(m_pivot, pivotMidCone)));
+      .onTrue(Commands.parallel(new elevatorGoTo(m_elevator, elevatorMidCone), new telescopeGoTo(m_telescope, telescopeMidCone), new pivotGoTo(m_pivot, pivotMidCone)));
     //high rung - right joystick
     new JoystickButton(xbox, 10)
-      .onTrue(Commands.parallel(new elevatorGoTo(elevator, elevatorHighCone), new telescopeGoTo(m_telescope, telescopeHighCone), new pivotGoTo(m_pivot, pivotHighCone)));
+      .onTrue(Commands.parallel(new elevatorGoTo(m_elevator, elevatorHighCone), new telescopeGoTo(m_telescope, telescopeHighCone), new pivotGoTo(m_pivot, pivotHighCone)));
     // new JoystickButton(xbox, Button.kY.value)
     //   .onTrue(new clawIn(m_claw));
 
@@ -209,6 +211,20 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+
+    if (m_teamColorChooser.getSelected() == "Blue") {
+      new blue(m_underglow);
+      new blue(m_lowerLeft);
+      new blue(m_lowerRight);
+      new blue(m_upperLeft);
+      new blue(m_upperRight);
+    } else if (m_teamColorChooser.getSelected() == "Red") {
+      new red(m_underglow);
+      new red(m_lowerLeft);
+      new red(m_lowerRight);
+      new red(m_upperLeft);
+      new red(m_upperRight);
+    }
     if (auto.getCommand() != null) {
       auto.getCommand().schedule();
     }

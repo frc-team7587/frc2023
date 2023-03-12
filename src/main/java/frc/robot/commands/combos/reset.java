@@ -12,7 +12,7 @@ public class reset extends CommandBase {
     public void execute() {
         Robot.m_pivot.resetPivot();
         Robot.m_telescope.resetTelescope();
-        Robot.elevator.resetElevator();
+        Robot.m_elevator.resetElevator();
     }
 
     @Override
