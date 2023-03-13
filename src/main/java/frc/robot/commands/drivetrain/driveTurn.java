@@ -12,7 +12,7 @@ public class driveTurn extends PIDCommand {
     public driveTurn(drivetrain m_drive, double angle) {
         super(new PIDController(0.01, 0, 0),
         
-            () -> Robot.imu.getHeading(),
+            () -> Robot.pos[0],
             currentAngle + angle,
             (output) -> m_drive.drive(0, output),
             m_drive);
@@ -24,7 +24,7 @@ public class driveTurn extends PIDCommand {
 
     @Override
     public void initialize() {
-        currentAngle = Robot.imu.getHeading();
+        currentAngle = Robot.pos[0];
     }
 
     @Override

@@ -1,23 +1,20 @@
-// package frc.robot.commands.combos;
+package frc.robot.commands.combos;
 
-// import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-// import frc.robot.subsystems.arm;
-// import frc.robot.subsystems.elevator;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Robot;
+import frc.robot.commands.arm.pivotGoTo;
+import frc.robot.commands.arm.telescopeGoTo;
+import frc.robot.commands.elevator.elevatorGoTo;
 
-// public class home extends SequentialCommandGroup {
-//     public arm m_arm;
-//     public elevator m_elevator;
+public class home extends ParallelCommandGroup {
 
-    // public home(arm subArm, elevator subElevator) {
-    //     addRequirements(subArm);
-    //     m_arm = subArm;
-    //     addRequirements(subElevator);
-    //     m_elevator = subElevator;
-    // }
-    //     @Override
-    //     public void execute() {
 
-    //     }
+    public home() {
+        addCommands(
+            new elevatorGoTo(Robot.m_elevator, 0),
+            new telescopeGoTo(Robot.m_telescope, 0),
+            new pivotGoTo(Robot.m_pivot, 0)
+        );
+    }
+}
 
-//     }
-// }

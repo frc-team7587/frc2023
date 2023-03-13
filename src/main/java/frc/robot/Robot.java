@@ -35,7 +35,10 @@ import frc.robot.commands.arm.telescopeOut;
 import frc.robot.commands.auto.autonomous;
 import frc.robot.commands.claw.clawIn;
 import frc.robot.commands.claw.clawOut;
+import frc.robot.commands.combos.home;
+import frc.robot.commands.combos.mid;
 import frc.robot.commands.combos.reset;
+import frc.robot.commands.combos.upper;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.elevator.elevatorDown;
 import frc.robot.commands.elevator.elevatorGoTo;
@@ -193,13 +196,13 @@ public class Robot extends TimedRobot {
     
       //home
     new JoystickButton(xbox, Button.kBack.value)
-      .onTrue(Commands.parallel(new elevatorGoTo(m_elevator, 0), new telescopeGoTo(m_telescope, 0), new pivotGoTo(m_pivot, 0)));
+      .onTrue(new home());
     //mid rung - left joystick
       new JoystickButton(xbox, 9)
-      .onTrue(Commands.parallel(new elevatorGoTo(m_elevator, elevatorMidCone), new telescopeGoTo(m_telescope, telescopeMidCone), new pivotGoTo(m_pivot, pivotMidCone)));
+      .onTrue(new mid());
     //high rung - right joystick
     new JoystickButton(xbox, 10)
-      .onTrue(Commands.parallel(new elevatorGoTo(m_elevator, elevatorHighCone), new telescopeGoTo(m_telescope, telescopeHighCone), new pivotGoTo(m_pivot, pivotHighCone)));
+      .onTrue(new upper());
     // new JoystickButton(xbox, Button.kY.value)
     //   .onTrue(new clawIn(m_claw));
 
