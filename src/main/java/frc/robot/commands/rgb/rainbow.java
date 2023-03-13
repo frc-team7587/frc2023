@@ -14,6 +14,7 @@ public class rainbow extends CommandBase{
     @Override
     public void execute() {
         rgb.setRainbow();
+        
     }
 
     @Override

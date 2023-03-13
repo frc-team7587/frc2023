@@ -67,11 +67,11 @@ public class Robot extends TimedRobot {
   public static final telescope m_telescope = new telescope();
   // public static final photon photon = new photon();
 
-  public static final rgb m_underglow = new rgb(0, 300);
-  public static final rgb m_upperLeft = new rgb(1, 144);
-  public static final rgb m_lowerLeft = new rgb(2, 144);
-  public static final rgb m_upperRight = new rgb(3, 144);
-  public static final rgb m_lowerRight = new rgb(4, 144);
+  // public static final rgb m_underglow = new rgb(0, 300);
+  // public static final rgb m_upperLeft = new rgb(1, 144);
+  // public static final rgb m_lowerLeft = new rgb(2, 144);
+  // public static final rgb m_upperRight = new rgb(3, 144);
+  public static final rgb m_lowerRight = new rgb(0, 288);
 
   public static BNO055 imu;
   private BNO055.CalData cal;
@@ -99,6 +99,9 @@ public class Robot extends TimedRobot {
     m_teamColorChooser.setDefaultOption("Red", "Red");
     SmartDashboard.putData(m_teamColorChooser);
 
+    imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
+				BNO055.vector_type_t.VECTOR_EULER);
+      
     System.out.println("Sensor present" + imu.isSensorPresent());
     System.out.println("Initialize complete" + imu.isInitialized());
     System.out.println("calibrated" + imu.isCalibrated());
@@ -127,49 +130,54 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
 
-    SmartDashboard.putNumber("Gyro", imu.getHeading());
+    // SmartDashboard.putNumber("Gyro", imu.getHeading());
     CommandScheduler.getInstance().run();
-    System.out.println("Pivot: " + m_pivot.getPivot());
-    System.out.println("Tele: " + m_telescope.getTelescope());
-    System.out.println("Elevator: " + m_elevator.getElevator());
+    // System.out.println("Pivot: " + m_pivot.getPivot());
+    // System.out.println("Tele: " + m_telescope.getTelescope());
+    // System.out.println("Elevator: " + m_elevator.getElevator());
 
-    pos = imu.getVector();
+    // pos = imu.getVector();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    // while (isDisabled()) {
-		// 	System.out.println("COMMS: " + imu.isSensorPresent()
-		// 			+ ", INITIALIZED: " + imu.isInitialized()
-		// 			+ ", CALIBRATED: " + imu.isCalibrated());
-		// 	if(imu.isInitialized()){
-		// 		pos = imu.getVector();
+    while (isDisabled()) {
+			System.out.println("COMMS: " + imu.isSensorPresent()
+					+ ", INITIALIZED: " + imu.isInitialized()
+					+ ", CALIBRATED: " + imu.isCalibrated());
+			if(imu.isInitialized()){
+				pos = imu.getVector();
 	
-		// 		/* Display the floating point data */
-		// 		System.out.println("\tX: " + f.format(pos[0])
-		// 				+ " Y: " + f.format(pos[1]) + " Z: " + f.format(pos[2])
-		// 				+ "  H: " + imu.getHeading());
+				/* Display the floating point data */
+				System.out.println("\tX: " + f.format(pos[0])
+						+ " Y: " + f.format(pos[1]) + " Z: " + f.format(pos[2])
+						+ "  H: " + imu.getHeading());
 	
-		// 		/* Display calibration status for each sensor. */
-		// 		cal = imu.getCalibration();
-		// 		System.out.println("\tCALIBRATION: Sys=" + cal.sys
-		// 				+ " Gyro=" + cal.gyro + " Accel=" + cal.accel
-		// 				+ " Mag=" + cal.mag);
-		// 	}
+				/* Display calibration status for each sensor. */
+				cal = imu.getCalibration();
+				System.out.println("\tCALIBRATION: Sys=" + cal.sys
+						+ " Gyro=" + cal.gyro + " Accel=" + cal.accel
+						+ " Mag=" + cal.mag);
+			}
 
-    // }
+    }
   }
 
   @Override
   public void disabledPeriodic() {}
 
   private void configureButtonBindings() {
+    // new JoystickButton(xbox, Button.kY.value)
+    //   .whileTrue(new elevatorUp(m_elevator));
+
     new JoystickButton(xbox, Button.kY.value)
-      .whileTrue(new elevatorUp(m_elevator));
-    
+      .onTrue(new blue(m_lowerRight));
+
     new JoystickButton(xbox, Button.kA.value)
-      .whileTrue(new elevatorDown(m_elevator));
+      .whileTrue(new rainbow(m_lowerRight));
+    // new JoystickButton(xbox, Button.kA.value)
+    //   .whileTrue(new elevatorDown(m_elevator));
 
     new JoystickButton(xbox, Button.kB.value)
       .onTrue(new driveStraight(m_drive, 24));
@@ -215,19 +223,19 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    if (m_teamColorChooser.getSelected() == "Blue") {
-      new blue(m_underglow);
-      new blue(m_lowerLeft);
-      new blue(m_lowerRight);
-      new blue(m_upperLeft);
-      new blue(m_upperRight);
-    } else if (m_teamColorChooser.getSelected() == "Red") {
-      new red(m_underglow);
-      new red(m_lowerLeft);
-      new red(m_lowerRight);
-      new red(m_upperLeft);
-      new red(m_upperRight);
-    }
+    // if (m_teamColorChooser.getSelected() == "Blue") {
+    //   new blue(m_underglow);
+    //   new blue(m_lowerLeft);
+    //   new blue(m_lowerRight);
+    //   // new blue(m_upperLeft);
+    //   // new blue(m_upperRight);
+    // } else if (m_teamColorChooser.getSelected() == "Red") {
+    //   new red(m_underglow);
+    //   new red(m_lowerLeft);
+    //   new red(m_lowerRight);
+    //   // new red(m_upperLeft);
+    //   // new red(m_upperRight);
+    // }
     if (auto.getCommand() != null) {
       auto.getCommand().schedule();
     }

@@ -8,6 +8,7 @@ public class rgb extends SubsystemBase {
     
     private final AddressableLED led;
     private final AddressableLEDBuffer buffer;
+    private int FirstPixelHue = 0;
 
     public rgb(int m_port, int m_length) {
         led = new AddressableLED(m_port);
@@ -51,7 +52,6 @@ public class rgb extends SubsystemBase {
 
     public void setRainbow() {
         // For every pixel
-        int FirstPixelHue = 0;
         for (var i = 0; i < buffer.getLength(); i++) {
           // Calculate the hue - hue is easier for rainbows because the color
           // shape is a circle so only one value needs to precess
