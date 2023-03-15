@@ -6,7 +6,7 @@ import frc.robot.subsystems.telescope;
 public class telescopeIn extends CommandBase {
     
     private final telescope telescope;
-
+    //will be the same as intake in
     public telescopeIn(telescope subsystem) {
         addRequirements(subsystem);
         telescope = subsystem;
