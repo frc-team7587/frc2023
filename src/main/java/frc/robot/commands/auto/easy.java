@@ -11,7 +11,7 @@ public class easy extends SequentialCommandGroup {
     public easy() {
         addCommands(
         new driveStraight(Robot.m_drive, 60.69),
-        //make a delay
+        new driveStraight(Robot.m_drive, 0),
         new driveStraight(Robot.m_drive, -60.69));
     }
 }
