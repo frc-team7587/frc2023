@@ -11,9 +11,9 @@ public class easy extends SequentialCommandGroup {
     public easy() {
         addCommands(
         new driveStraight(Robot.m_drive, 60.69),
-        new armOut();
-        new intakeOut();
-        new armIn();
+        new armOut();,
+        new intakeOut();,
+        new armIn();,
         new driveStraight(Robot.m_drive, -60.69));
     }
 }
