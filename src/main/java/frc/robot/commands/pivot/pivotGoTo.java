@@ -1,4 +1,4 @@
-package frc.robot.commands.arm;
+package frc.robot.commands.pivot;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;

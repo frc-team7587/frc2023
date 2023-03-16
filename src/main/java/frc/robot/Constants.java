@@ -23,7 +23,7 @@ public final class Constants {
     public static final int elevatorPort1 = 5;
     public static final int elevatorPort2 = 6;
     public static final int pivotPort = 7;
-    public static final int telescopePort = 8;
+    public static final int intakePort = 8;
 
 
     //solenoid ports
@@ -71,9 +71,10 @@ public final class Constants {
     public static final double metersPerPulse = wheelCircumference * rotationsPerEncoderCount * axelToMotor;
 
     //motor speeds
-    public static final double telescopeSpeedIn = 0.2;
-    public static final double telescopeSpeedOut = -0.2;
-    public static final double telescopeSpeedStop = 0;
+    public static final double intakeSpeedIn = 0.2;
+    public static final double intakeSpeedOut = -0.2;
+    public static final double intakeSpeedStop = 0;
+    public static final double intakeMultiplier = 0.2;
 
     public static final double pivotSpeedUp = -0.5;
     public static final double pivotSpeedDown = 0.3;

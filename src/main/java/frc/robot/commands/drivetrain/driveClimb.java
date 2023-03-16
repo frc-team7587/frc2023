@@ -6,8 +6,6 @@ import frc.robot.Robot;
 import frc.robot.subsystems.drivetrain;
 
 public class driveClimb extends PIDCommand {
-    
-    private final drivetrain m_drive;
 
     public driveClimb(drivetrain m_drive) {
         super(new PIDController(0.01, 0, 0),
@@ -20,7 +18,6 @@ public class driveClimb extends PIDCommand {
             getController().enableContinuousInput(-180, 180);
             getController().setTolerance(2, 0);
 
-            this.m_drive = m_drive;
     }
 
     @Override

@@ -1,16 +1,16 @@
-package frc.robot.commands.arm;
+package frc.robot.commands.intake;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
-import frc.robot.subsystems.telescope;
+import frc.robot.subsystems.intake;
 
-public class telescopeGoTo extends PIDCommand {
+public class intakeGoTo extends PIDCommand {
 
-    public telescopeGoTo(telescope subsystem, double target) {
+    public intakeGoTo(intake subsystem, double target) {
         super(new PIDController(0.3, 0, 0),
-        () -> subsystem.getTelescope(),
+        () -> subsystem.getIntake(),
         target,
-        (output) -> subsystem.setTelescope(output),
+        (output) -> subsystem.setIntake(output),
         subsystem);
 
         getController().setTolerance(1);

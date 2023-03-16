@@ -15,7 +15,8 @@ public class driveStraight extends PIDCommand {
             distance,
             (output) -> m_drive.drive(output, 0),
             m_drive);
-        
+
+            // getController().enableContinuousInput(-180, 180);
             getController().setTolerance(1, 0);
 
             this.m_drive = m_drive;

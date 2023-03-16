@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class claw extends SubsystemBase{
+public class arm extends SubsystemBase{
     
     private final Compressor compressor;
     private final DoubleSolenoid solenoid;
 
-    public claw() {
+    public arm() {
 
         compressor = new Compressor(pcm, PneumaticsModuleType.CTREPCM);
         solenoid = new DoubleSolenoid(pcm, PneumaticsModuleType.CTREPCM, solenoid1, solenoid2);
@@ -21,11 +21,11 @@ public class claw extends SubsystemBase{
         compressor.enableDigital();
     }
 
-    public void clawIn() {
+    public void armIn() {
         solenoid.set(DoubleSolenoid.Value.kForward);
     }
 
-    public void clawOut() {
+    public void armOut() {
         solenoid.set(DoubleSolenoid.Value.kReverse);
     }
 

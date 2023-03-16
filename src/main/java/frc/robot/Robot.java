@@ -8,46 +8,29 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.pivot;
 import frc.robot.subsystems.rgb;
-import frc.robot.subsystems.telescope;
-import frc.robot.subsystems.claw;
+import frc.robot.subsystems.intake;
+import frc.robot.subsystems.arm;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.elevator;
 import frc.robot.subsystems.marquee;
 import frc.robot.subsystems.photon;
 
-import static frc.robot.Constants.*;
-
 import java.text.DecimalFormat;
-import frc.robot.commands.arm.pivotDown;
-import frc.robot.commands.arm.pivotGoTo;
-import frc.robot.commands.arm.pivotUp;
-import frc.robot.commands.arm.telescopeGoTo;
-import frc.robot.commands.arm.telescopeIn;
-import frc.robot.commands.arm.telescopeOut;
+import frc.robot.commands.intake.*;
+import frc.robot.commands.arm.*;
 import frc.robot.commands.auto.autonomous;
-import frc.robot.commands.claw.clawIn;
-import frc.robot.commands.claw.clawOut;
-import frc.robot.commands.combos.home;
-import frc.robot.commands.combos.mid;
-import frc.robot.commands.combos.reset;
-import frc.robot.commands.combos.upper;
 import frc.robot.commands.drivetrain.*;
-import frc.robot.commands.elevator.elevatorDown;
-import frc.robot.commands.elevator.elevatorGoTo;
-import frc.robot.commands.elevator.elevatorUp;
 import frc.robot.commands.marquee.display7587;
-import frc.robot.commands.photon.setApril;
-import frc.robot.commands.photon.setReflective;
-import frc.robot.utilities.BNO055;
+import frc.robot.commands.photon.*;
 import frc.robot.commands.rgb.*;
+import frc.robot.utilities.BNO055;
+
 
 
 
@@ -63,10 +46,10 @@ public class Robot extends TimedRobot {
   public static final Joystick logi = new Joystick(0);
   public static final XboxController  xbox = new XboxController(1);
   public static final marquee m_marquee = new marquee();
-  public static final claw m_claw = new claw();
+  public static final arm m_arm = new arm();
   public static final elevator m_elevator = new elevator();
   public static final pivot m_pivot = new pivot();
-  public static final telescope m_telescope = new telescope();
+  public static final intake m_intake = new intake();
   public static final photon photon = new photon();
 
   // public static final rgb m_underglow = new rgb(0, 300);
@@ -111,15 +94,14 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     photon.isConnected();
     m_drive.resetEncoders();
-    m_telescope.resetTelescope();
+    m_intake.resetIntake();
     m_pivot.resetPivot();
     m_elevator.resetElevator();
-    new blue(m_lowerRight);
     configureButtonBindings();
 
     // m_marquee.setDefaultCommand(new display7587(m_marquee));
     m_drive.setDefaultCommand(new defaultDrive(m_drive));
-
+    m_intake.setDefaultCommand(new intakeDefault(m_intake));
   }
 
   /**
@@ -182,25 +164,19 @@ public class Robot extends TimedRobot {
     //   .whileTrue(new elevatorDown(m_elevator));
 
     new JoystickButton(xbox, Button.kB.value)
-      .onTrue(new clawIn(m_claw));
+      .onTrue(new armIn(m_arm));
 
     new JoystickButton(xbox, Button.kA.value)
       .onTrue(new display7587(m_marquee));
       // new JoystickButton(xbox, Button.kY.value)
       // .whileTrue(new pivotUp(m_pivot));
     new JoystickButton(xbox, Button.kX.value)
-      .onTrue(new clawOut(m_claw));
+      .onTrue(new armOut(m_arm));
     // new JoystickButton(xbox, Button.kX.value)
     //   .onTrue(new telescopeGoTo(m_arm, telescopeTarget));
 
       // new JoystickButton(xbox, Button.kA.value)
       // .onTrue(new telescopeGoTo(m_arm, 0));
-
-    new JoystickButton(xbox, Button.kLeftBumper.value)
-      .whileTrue(new telescopeIn(m_telescope));
-    
-    new JoystickButton(xbox, Button.kRightBumper.value)
-      .whileTrue(new telescopeOut(m_telescope));
 
     new JoystickButton(xbox, Button.kStart.value)
       .onTrue(new setApril(photon));
