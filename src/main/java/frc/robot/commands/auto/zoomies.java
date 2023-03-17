@@ -8,9 +8,9 @@ import frc.robot.commands.drivetrain.driveTurn;
 public class zoomies extends SequentialCommandGroup{
     public zoomies() {
         addCommands(
-        new driveStraight(Robot.m_drive, -60.69),
-        new driveTurn(Robot.m_drive, 270),
-        new driveStraight(Robot.m_drive, 60.69),
-        new driveTurn(Robot.m_drive, 90));
+        new driveStraight(Robot.m_drive, -60.69, Robot.m_drive.getAverageDistance()),
+        new driveTurn(Robot.m_drive, -90, Robot.pos[0]),
+        new driveStraight(Robot.m_drive, 60.69, Robot.m_drive.getAverageDistance()),
+        new driveTurn(Robot.m_drive, 90, Robot.pos[0]));
     }
 }

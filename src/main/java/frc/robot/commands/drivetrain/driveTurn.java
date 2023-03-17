@@ -6,14 +6,12 @@ import frc.robot.subsystems.drivetrain;
 import frc.robot.Robot;
 
 public class driveTurn extends PIDCommand {
-
-    private static double currentAngle;
     
-    public driveTurn(drivetrain m_drive, double angle) {
+    public driveTurn(drivetrain m_drive, double angle, double current) {
         super(new PIDController(0.01, 0, 0),
         
             () -> Robot.pos[0],
-            currentAngle + angle,
+            current + angle,
             (output) -> m_drive.drive(0, output),
             m_drive);
         
@@ -24,7 +22,6 @@ public class driveTurn extends PIDCommand {
 
     @Override
     public void initialize() {
-        currentAngle = Robot.pos[0];
     }
 
     @Override

@@ -12,11 +12,11 @@ import frc.robot.commands.intake.intakeOut;
 public class setUp extends SequentialCommandGroup{
     public setUp() {
         addCommands(
-        new driveStraight(Robot.m_drive, 60.69),
+        new driveStraight(Robot.m_drive, 60.69, Robot.m_drive.getAverageDistance()),
         new armOut(Robot.m_arm),
         new intakeOut(Robot.m_intake),
         new armIn(Robot.m_arm),
-        new driveTurn(Robot.m_drive, 180),
+        new driveTurn(Robot.m_drive, 180, Robot.pos[0]),
         new pivotGoTo(Robot.m_pivot, 0.5),
         new armIn(Robot.m_arm),
         new armOut(Robot.m_arm));

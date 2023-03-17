@@ -8,11 +8,11 @@ public class driveStraight extends PIDCommand {
     
     private final drivetrain m_drive;
 
-    public driveStraight(drivetrain m_drive, double distance) {
+    public driveStraight(drivetrain m_drive, double distance, double current) {
         super(new PIDController(0.01, 0, 0),
         
             () -> m_drive.getAverageDistance(),
-            distance,
+            current + distance,
             (output) -> m_drive.drive(output, 0),
             m_drive);
 
@@ -24,7 +24,7 @@ public class driveStraight extends PIDCommand {
 
     @Override
     public void initialize() {
-        m_drive.resetEncoders();
+        // m_drive.resetEncoders();
     }
 
     @Override
