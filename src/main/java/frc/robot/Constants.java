@@ -52,14 +52,12 @@ public final class Constants {
     public static final double elevatorLower = -21.5;
 
     //cone middle rung
-    public static final double telescopeMid = -42.2;
-    public static final double pivotMid = 48.4;
-    public static final double elevatorMid = 0;
+    public static final double pivotMid = 73;
+    public static final double elevatorMid = -10;
 
     //cone high rung
-    public static final double telescopeUpper = -64;
-    public static final double pivotUpper = 91.5;
-    public static final double elevatorUpper = -24.7;
+    public static final double pivotUpper = 85;
+    public static final double elevatorUpper = -24;
 
     //drivetrain encoder calculations
     public static final double wheelDiameter = 0.03; //meters

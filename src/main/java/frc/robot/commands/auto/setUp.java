@@ -7,14 +7,15 @@ import frc.robot.commands.arm.armOut;
 import frc.robot.commands.pivot.pivotGoTo;
 import frc.robot.commands.drivetrain.driveStraight;
 import frc.robot.commands.drivetrain.driveTurn;
+import frc.robot.commands.intake.intakeOut;
 
 public class setUp extends SequentialCommandGroup{
     public setUp() {
         addCommands(
         new driveStraight(Robot.m_drive, 60.69),
-        new armOut();,
-        new intakeOut();,
-        new armIn();,
+        new armOut(Robot.m_arm),
+        new intakeOut(Robot.m_intake),
+        new armIn(Robot.m_arm),
         new driveTurn(Robot.m_drive, 180),
         new pivotGoTo(Robot.m_pivot, 0.5),
         new armIn(Robot.m_arm),

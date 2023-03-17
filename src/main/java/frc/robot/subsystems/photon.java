@@ -47,9 +47,7 @@ public class photon extends SubsystemBase {
         return PhotonUtils.calculateDistanceToTargetMeters(CAMERA_HEIGHT_METERS, TARGET_HEIGHT_METERS, CAMERA_PITCH_RADIANS, camera.getLatestResult().getBestTarget().getPitch());
     }
 
-    public double getReflectiveYaw() {
-
-        camera.setPipelineIndex(reflectivePipeline);
+    public double getYaw() {
 
         if(camera.getLatestResult().hasTargets()) {
             return camera.getLatestResult().getBestTarget().getYaw();

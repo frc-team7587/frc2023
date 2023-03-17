@@ -7,7 +7,7 @@ import frc.robot.subsystems.pivot;
 public class pivotGoTo extends PIDCommand {
 
     public pivotGoTo(pivot subsystem, double target) {
-        super(new PIDController(0.07, 0, 0),
+        super(new PIDController(0.05, 0, 0),
         () -> subsystem.getPivot(),
         target,
         (output) -> subsystem.setPivot(output),

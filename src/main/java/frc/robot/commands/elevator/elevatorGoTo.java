@@ -7,7 +7,7 @@ import frc.robot.subsystems.elevator;
 public class elevatorGoTo extends PIDCommand {
 
     public elevatorGoTo(elevator subsystem, double target) {
-        super(new PIDController(0.03, 0, 0),
+        super(new PIDController(0.05, 0, 0),
         () -> subsystem.getElevator(),
         target,
         (output) -> subsystem.setElevator(output),

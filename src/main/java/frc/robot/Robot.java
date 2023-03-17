@@ -25,9 +25,16 @@ import java.text.DecimalFormat;
 import frc.robot.commands.intake.*;
 import frc.robot.commands.arm.*;
 import frc.robot.commands.auto.autonomous;
+import frc.robot.commands.combos.mid;
+import frc.robot.commands.combos.reset;
+import frc.robot.commands.combos.upper;
 import frc.robot.commands.drivetrain.*;
+import frc.robot.commands.elevator.elevatorDown;
+import frc.robot.commands.elevator.elevatorUp;
 import frc.robot.commands.marquee.display7587;
 import frc.robot.commands.photon.*;
+import frc.robot.commands.pivot.pivotDown;
+import frc.robot.commands.pivot.pivotUp;
 import frc.robot.commands.rgb.*;
 import frc.robot.utilities.BNO055;
 
@@ -56,7 +63,7 @@ public class Robot extends TimedRobot {
   // public static final rgb m_upperLeft = new rgb(1, 144);
   // public static final rgb m_lowerLeft = new rgb(2, 144);
   // public static final rgb m_upperRight = new rgb(3, 144);
-  public static final rgb m_lowerRight = new rgb(0, 288);
+  public static final rgb m_sideRGB = new rgb(0, 288);
 
   public static BNO055 imu;
   private BNO055.CalData cal;
@@ -81,7 +88,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_chooser);
 
     m_teamColorChooser.setDefaultOption("Blue", "Blue");
-    m_teamColorChooser.setDefaultOption("Red", "Red");
+    m_teamColorChooser.addOption("Red", "Red");
     SmartDashboard.putData(m_teamColorChooser);
 
     imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
@@ -102,6 +109,7 @@ public class Robot extends TimedRobot {
     // m_marquee.setDefaultCommand(new display7587(m_marquee));
     m_drive.setDefaultCommand(new defaultDrive(m_drive));
     m_intake.setDefaultCommand(new intakeDefault(m_intake));
+    m_sideRGB.setDefaultCommand(new defaultRGB(m_sideRGB));
   }
 
   /**
@@ -116,11 +124,10 @@ public class Robot extends TimedRobot {
 
     // SmartDashboard.putNumber("Gyro", imu.getHeading());
     CommandScheduler.getInstance().run();
-    // System.out.println("Pivot: " + m_pivot.getPivot());
-    // System.out.println("Tele: " + m_telescope.getTelescope());
-    // System.out.println("Elevator: " + m_elevator.getElevator());
+    System.out.println("Pivot: " + m_pivot.getPivot());
+    System.out.println("Elevator: " + m_elevator.getElevator());
     // pos = imu.getVector();
-    photon.isConnected();
+    // photon.isConnected();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -152,26 +159,32 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {}
 
   private void configureButtonBindings() {
-    // new JoystickButton(xbox, Button.kY.value)
-    //   .whileTrue(new elevatorUp(m_elevator));
-
-    // new JoystickButton(xbox, Button.kY.value)
-    //   .onTrue(new blue(m_lowerRight));
-
     new JoystickButton(xbox, Button.kY.value)
-      .whileTrue(new rainbow(m_lowerRight));
-    // new JoystickButton(xbox, Button.kA.value)
-    //   .whileTrue(new elevatorDown(m_elevator));
+      .whileTrue(new elevatorUp(m_elevator));
 
-    new JoystickButton(xbox, Button.kB.value)
-      .onTrue(new armIn(m_arm));
-
+    new JoystickButton(xbox, Button.kStart.value)
+      .whileTrue(new reset());
     new JoystickButton(xbox, Button.kA.value)
-      .onTrue(new display7587(m_marquee));
+      .whileTrue(new elevatorDown(m_elevator));
+
+    new JoystickButton(xbox, Button.kLeftBumper.value)
+      .onTrue(new armIn(m_arm));
+    
+      new JoystickButton(xbox, Button.kLeftStick.value)
+        .onTrue(new upper());
+
+    new JoystickButton(xbox, Button.kBack.value)
+      .onTrue(new mid());
       // new JoystickButton(xbox, Button.kY.value)
       // .whileTrue(new pivotUp(m_pivot));
-    new JoystickButton(xbox, Button.kX.value)
+    new JoystickButton(xbox, Button.kRightBumper.value)
       .onTrue(new armOut(m_arm));
+
+    new JoystickButton(xbox, Button.kB.value)
+      .whileTrue(new pivotUp(m_pivot));
+      
+    new JoystickButton(xbox, Button.kX.value)
+      .whileTrue(new pivotDown(m_pivot));
     // new JoystickButton(xbox, Button.kX.value)
     //   .onTrue(new telescopeGoTo(m_arm, telescopeTarget));
 
@@ -204,19 +217,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    // if (m_teamColorChooser.getSelected() == "Blue") {
-    //   new blue(m_underglow);
-    //   new blue(m_lowerLeft);
-    //   new blue(m_lowerRight);
-    //   // new blue(m_upperLeft);
-    //   // new blue(m_upperRight);
-    // } else if (m_teamColorChooser.getSelected() == "Red") {
-    //   new red(m_underglow);
-    //   new red(m_lowerLeft);
-    //   new red(m_lowerRight);
-    //   // new red(m_upperLeft);
-    //   // new red(m_upperRight);
-    // }
     if (auto.getCommand() != null) {
       auto.getCommand().schedule();
     }
