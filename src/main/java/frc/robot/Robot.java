@@ -185,9 +185,7 @@ public class Robot extends TimedRobot {
     new JoystickButton(xbox, Button.kX.value)
       .whileTrue(new pivotDown(m_pivot));
 
-    new JoystickButton(logi, 7).toggleOnTrue(new displayMessage(m_marquee, team_message_blue));
-    new JoystickButton(logi, 8).toggleOnTrue(new displayMessage(m_marquee, team_message_red));
-    new JoystickButton(logi, 9).toggleOnTrue(new displayMessage(m_marquee, thank_you_message));
+    new JoystickButton(logi, 7).toggleOnTrue(new displayMessage(m_marquee));
     // new JoystickButton(xbox, Button.kX.value)
     //   .onTrue(new telescopeGoTo(m_arm, telescopeTarget));
 

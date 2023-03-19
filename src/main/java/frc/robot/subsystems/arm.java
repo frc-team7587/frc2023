@@ -14,7 +14,6 @@ public class arm extends SubsystemBase{
     private final DoubleSolenoid solenoid;
 
     public arm() {
-
         compressor = new Compressor(pcm, PneumaticsModuleType.CTREPCM);
         solenoid = new DoubleSolenoid(pcm, PneumaticsModuleType.CTREPCM, solenoid1, solenoid2);
 
