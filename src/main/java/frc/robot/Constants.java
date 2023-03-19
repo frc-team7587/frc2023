@@ -78,8 +78,16 @@ public final class Constants {
     public static final double pivotSpeedDown = 0.3;
     public static final double elevatorUp = -0.2;
     public static final double elevatorDown = 0.1;
-    ;
+    
+    // Marquee Commands
 
+    // Scrolling "Metuchen Momentum" in medium blue on a black background with default delay values.
+    public static final String team_message_blue = "Metuchen Momentum Team 7587|6|0|0|0|0|127|0|0|0\r\n";
 
+    // Scrolling "Metuchen Momentum" in medium red on a black background with default delay values.
+    public static final String team_message_red = "Metuchen Momentum Team 7587|6|0|0|127|0|0|0|0|0\r\n";
 
+    // Scrolling "Thank you, Robbinsville Robotics" in medium yellow with two second
+    // initial delay and 250 millisecond inter-frame delay.
+    public static final String thank_you_message = "Thank you, Robbinsville Robitics|6|2000|250|63|63|0|0|0|0\r\n";
 }

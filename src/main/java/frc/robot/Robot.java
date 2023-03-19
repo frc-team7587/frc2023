@@ -31,13 +31,13 @@ import frc.robot.commands.combos.upper;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.elevator.elevatorDown;
 import frc.robot.commands.elevator.elevatorUp;
-import frc.robot.commands.marquee.display7587;
+import frc.robot.commands.marquee.displayMessage;
 import frc.robot.commands.photon.*;
 import frc.robot.commands.pivot.pivotDown;
 import frc.robot.commands.pivot.pivotUp;
 import frc.robot.commands.rgb.*;
 import frc.robot.utilities.BNO055;
-
+import static frc.robot.Constants.*;
 
 
 
@@ -106,7 +106,6 @@ public class Robot extends TimedRobot {
     m_elevator.resetElevator();
     configureButtonBindings();
 
-    // m_marquee.setDefaultCommand(new display7587(m_marquee));
     m_drive.setDefaultCommand(new defaultDrive(m_drive));
     m_intake.setDefaultCommand(new intakeDefault(m_intake));
     m_sideRGB.setDefaultCommand(new defaultRGB(m_sideRGB));
@@ -185,6 +184,10 @@ public class Robot extends TimedRobot {
       
     new JoystickButton(xbox, Button.kX.value)
       .whileTrue(new pivotDown(m_pivot));
+
+    new JoystickButton(logi, 7).toggleOnTrue(new displayMessage(m_marquee, team_message_blue));
+    new JoystickButton(logi, 8).toggleOnTrue(new displayMessage(m_marquee, team_message_red));
+    new JoystickButton(logi, 9).toggleOnTrue(new displayMessage(m_marquee, thank_you_message));
     // new JoystickButton(xbox, Button.kX.value)
     //   .onTrue(new telescopeGoTo(m_arm, telescopeTarget));
 
