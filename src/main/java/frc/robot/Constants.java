@@ -56,30 +56,46 @@ public final class Constants {
     public static final double elevatorMid = -10;
 
     //cone high rung
-    public static final double pivotUpper = 85;
-    public static final double elevatorUpper = -24;
+    public static final double pivotUpper = 60;
+    public static final double elevatorUpper = -26;
 
     //drivetrain encoder calculations
-    public static final double wheelDiameter = 0.03; //meters
+    public static final double wheelDiameter = 6; //inches
     public static final double wheelCircumference = wheelDiameter * Math.PI;
     public static final double encoderCountsPerRev = 42; //Neo Hall Sensor
     public static final double rotationsPerEncoderCount = 1 / encoderCountsPerRev;
     public static final double driveGearBoxFactor = 12.75; //toughbox
     public static final double axelToMotor = 1 / driveGearBoxFactor;
-    public static final double metersPerPulse = wheelCircumference * rotationsPerEncoderCount * axelToMotor;
+    // public static final double metersPerPulse = wheelCircumference * rotationsPerEncoderCount * axelToMotor;
+    public static final double inchesPerPulse = wheelCircumference * axelToMotor;
 
     //motor speeds
-    public static final double intakeSpeedIn = 0.2;
+    public static final double intakeSpeedIn = 0.4;
     public static final double intakeSpeedOut = -0.2;
     public static final double intakeSpeedStop = 0;
-    public static final double intakeMultiplier = 0.2;
+    public static final double intakeMultiplier = 0.4;
 
     public static final double pivotSpeedUp = -0.5;
-    public static final double pivotSpeedDown = 0.3;
+    public static final double pivotSpeedDown = 0.4;
     public static final double elevatorUp = -0.2;
     public static final double elevatorDown = 0.1;
     ;
 
 
-
+    //Commands
+    public static final String team_message_blue = "7587|5|0|0|0|0|127|0|0|0\r\n";
+    public static final String team_message_red = "7587|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String thank_you_message_1 = "THANK|5|2000|250|63|63|0|0|0|0\r\n";
+    public static final String thank_you_message_2 = "YOU|5|2000|250|63|63|0|0|0|0\r\n";
+    // Sponsors: Exxon, Picatinny, Elks, Cole Solutions, ADP, Nokia, JStar
+    public static final String sponsor_1 = "Exxon|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String sponsor_2A = "Picat|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String sponsor_2B = "inny|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String sponsor_2C = "STEM|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String sponsor_3A = "Elks|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String sponsor_3B = "Lodge|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String sponsor_4 = "Cole|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String sponsor_5 = "ADP|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String sponsor_6 = "Nokia|5|0|0|127|0|0|0|0|0\r\n";
+    public static final String sponsor_7 = "JStar|5|0|0|127|0|0|0|0|0\r\n";
 }

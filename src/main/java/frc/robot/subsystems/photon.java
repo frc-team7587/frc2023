@@ -40,10 +40,8 @@ public class photon extends SubsystemBase {
         return camera.getLatestResult().hasTargets();
     }
 
-    public double getAprilDistance() {
+    public double getDistance() {
         
-        camera.setPipelineIndex(aprilPipeline);
-
         return PhotonUtils.calculateDistanceToTargetMeters(CAMERA_HEIGHT_METERS, TARGET_HEIGHT_METERS, CAMERA_PITCH_RADIANS, camera.getLatestResult().getBestTarget().getPitch());
     }
 

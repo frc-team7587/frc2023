@@ -14,7 +14,7 @@ public class defaultDrive extends CommandBase {
 
     @Override
     public void execute() {
-        m_drive.drive(Robot.logi.getY() * Robot.logi.getThrottle(), Robot.logi.getTwist() * Robot.logi.getThrottle());
+        m_drive.drive(Robot.logi.getY() * Robot.logi.getThrottle(), .6 * Robot.logi.getTwist() * Robot.logi.getThrottle());
     }
 
     @Override

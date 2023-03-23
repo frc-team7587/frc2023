@@ -15,10 +15,11 @@ public class defaultRGB extends CommandBase{
 
     @Override
     public void execute() {
-        if (Robot.m_teamColorChooser.getSelected() == "Blue") {
-            rgb.setBlue();
-        } else if (Robot.m_teamColorChooser.getSelected() == "Red") {
-            rgb.setRed();
-        }
+        // if (Robot.m_teamColorChooser.getSelected() == "Blue") {
+        //     rgb.setBlue();
+        // } else if (Robot.m_teamColorChooser.getSelected() == "Red") {
+        //     rgb.setRed();
+        // }
+        rgb.setRed();
     }
 }

@@ -12,11 +12,7 @@ import frc.robot.Constants;
 public class lower extends SequentialCommandGroup {
 
     public lower() {
-        addCommands(
-            Commands.parallel(new elevatorGoTo(Robot.m_elevator, Constants.elevatorLower),
-            new pivotGoTo(Robot.m_pivot, Constants.pivotLower)),
-            new armOut(Robot.m_arm)
-        );
+      
     }
 }
 

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import static frc.robot.Constants.*;
@@ -30,6 +31,15 @@ public class elevator extends SubsystemBase {
 
         elevatorEncoder1 = elevator1.getEncoder();
         elevatorEncoder2 = elevator2.getEncoder();
+
+        // elevator1.enableSoftLimit(SoftLimitDirection.kForward, true);
+        // elevator1.setSoftLimit(SoftLimitDirection.kForward, 0);
+        // elevator1.setSoftLimit(SoftLimitDirection.kReverse, -24);
+
+
+        // elevator2.enableSoftLimit(SoftLimitDirection.kForward, true);
+        // elevator2.setSoftLimit(SoftLimitDirection.kForward, 0);
+        // elevator2.setSoftLimit(SoftLimitDirection.kReverse, -24);
 
     }
 

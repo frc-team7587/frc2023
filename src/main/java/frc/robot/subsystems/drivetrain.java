@@ -43,6 +43,8 @@ public class drivetrain extends SubsystemBase {
         rightFrontEncoder = rightFront.getEncoder();
         rightRearEncoder = rightRear.getEncoder();
 
+        // leftRearEncoder.setPositionConversionFactor(inchesPerPulse);
+
         left = new MotorControllerGroup(leftFront, leftRear);
         right = new MotorControllerGroup(rightFront, rightRear);
 
