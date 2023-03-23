@@ -13,6 +13,18 @@ public class marquee extends SubsystemBase{
     }
 
     public void displayMessage(String message) {
-        marquee.writeString(message);
+
+        byte[] toSend = new byte[128];
+
+        for(int i = 0; i<toSend.length; i++) {
+            toSend[i] = 0;
+        }
+        
+        byte[] messageBytes = message.getBytes(Charset.forName("ASCII"));
+        for(int i = 0; i<messageBytes.length; i++) {
+            toSend[i] = messageBytes[i];
+        }
+
+        marquee.writeString(message); //need to figure this out
     }
 }
