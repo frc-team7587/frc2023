@@ -9,7 +9,11 @@ public class autonomous {
     public autonomous(){
     }
     public Command getCommand() {
-        CommandBase cmd = new easy();        // CommandBase cmd = null;
+        CommandBase cmd = new easy(); 
+       // CommandBase cmd = new PopAndLock();
+       // Command cmd = new Zoomies();
+       // Command cmd = new 
+        // CommandBase cmd = null;
         // switch(Robot.m_chooser.getSelected()) {
         //     case "Easy":
         //     cmd = new easy();
