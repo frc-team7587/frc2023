@@ -14,31 +14,30 @@ public class arm extends SubsystemBase{
     private final DoubleSolenoid solenoid;
 
     public arm() {
-
-        compressor = new Compressor(pcm, PneumaticsModuleType.CTREPCM);
-        solenoid = new DoubleSolenoid(pcm, PneumaticsModuleType.CTREPCM, solenoid1, solenoid2);
+        compressor = new Compressor(pcm, PneumaticsModuleType.REVPH);
+        solenoid = new DoubleSolenoid(pcm, PneumaticsModuleType.REVPH, solenoid1, solenoid2);
 
         // compressor.enableAnalog(60, 120);
-      compressor.enableDigital();
+      compressor.enableDigital();;
         
-        // boolean getPressureSwitch = compressor.getPressureSwitchValue()
+        double getPressureSwitch = compressor.getPressure();
 
     }
 
     public void armIn() {
-        solenoid.set(DoubleSolenoid.Value.kForward);
+        solenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void armOut() {
-        solenoid.set(DoubleSolenoid.Value.kReverse);
+        solenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     public void off() {
         solenoid.set(DoubleSolenoid.Value.kOff);
     }
 
-    public boolean getPressure() {
-        return compressor.getPressureSwitchValue();
+    public double getPressure() {
+        return compressor.getPressure();
     }
 
     @Override

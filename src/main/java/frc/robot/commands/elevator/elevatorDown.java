@@ -16,7 +16,6 @@ public class elevatorDown extends CommandBase {
     public void execute() {
         elevator.elevatorDown();
     }
-
     @Override
     public void end(boolean interrupted) {
         elevator.elevatorStop();

@@ -5,18 +5,18 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.pivot.pivotGoTo;
-import frc.robot.commands.arm.armIn;
+import frc.robot.commands.arm.armOut;
 import frc.robot.commands.elevator.elevatorGoTo;
+import frc.robot.Constants;
 
-public class home extends SequentialCommandGroup {
+public class hs extends SequentialCommandGroup {
 
 
-    public home() {
+    public hs() {
         addCommands(
-            new armIn(Robot.m_arm).withTimeout(0.5),
-            Commands.parallel(new pivotGoTo(Robot.m_pivot, 0),
-            new elevatorGoTo(Robot.m_elevator, 0))
-            
+            Commands.parallel(new elevatorGoTo(Robot.m_elevator, Constants.elevatorUpper),
+            new pivotGoTo(Robot.m_pivot, Constants.pivotHs)),
+            new armOut(Robot.m_arm)
         );
     }
 }

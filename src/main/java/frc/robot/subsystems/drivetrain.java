@@ -93,9 +93,7 @@ public class drivetrain extends SubsystemBase {
     }
 
     public void setMaxOutput(double output) {
-
         this.drive.setMaxOutput(output);
-
     }
 
     @Override

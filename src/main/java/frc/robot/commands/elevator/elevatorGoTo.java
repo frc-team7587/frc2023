@@ -10,13 +10,13 @@ public class elevatorGoTo extends PIDCommand {
     private double target;
 
     public elevatorGoTo(elevator subsystem, double target) {
-        super(new PIDController(0.03, 0, 0),
+        super(new PIDController(0.04, 0, 0),
         () -> subsystem.getElevator(),
         target,
         (output) -> subsystem.setElevator(output),
         subsystem);
 
-        getController().setTolerance(2);
+        getController().setTolerance(1);
         this.target = target;
     }
 

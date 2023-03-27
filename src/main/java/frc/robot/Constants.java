@@ -15,7 +15,7 @@ package frc.robot;
 public final class Constants {
 
     //CAN ports
-    public static final int pcm = 0;
+    public static final int pcm = 10;
     public static final int RFront = 1;
     public static final int RRear = 2;
     public static final int LFront = 3;
@@ -57,8 +57,10 @@ public final class Constants {
 
     //cone high rung
     public static final double pivotUpper = 60;
-    public static final double elevatorUpper = -26;
+    public static final double elevatorUpper = -27;
 
+    //human station
+    public static final double pivotHs = 85;
     //drivetrain encoder calculations
     public static final double wheelDiameter = 6; //inches
     public static final double wheelCircumference = wheelDiameter * Math.PI;
@@ -70,13 +72,13 @@ public final class Constants {
     public static final double inchesPerPulse = wheelCircumference * axelToMotor;
 
     //motor speeds
-    public static final double intakeSpeedIn = 0.4;
+    public static final double intakeSpeedIn = 0.05;
     public static final double intakeSpeedOut = -0.2;
     public static final double intakeSpeedStop = 0;
-    public static final double intakeMultiplier = 0.4;
+    public static final double intakeMultiplier = 0.6;
 
-    public static final double pivotSpeedUp = -0.5;
-    public static final double pivotSpeedDown = 0.4;
+    public static final double pivotSpeedUp = -0.8;
+    public static final double pivotSpeedDown = 0.6;
     public static final double elevatorUp = -0.2;
     public static final double elevatorDown = 0.1;
     

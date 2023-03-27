@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -29,18 +31,22 @@ import frc.robot.commands.intake.*;
 import frc.robot.commands.arm.*;
 import frc.robot.commands.auto.autonomous;
 import frc.robot.commands.combos.home;
+import frc.robot.commands.combos.hs;
 import frc.robot.commands.combos.mid;
 import frc.robot.commands.combos.reset;
 import frc.robot.commands.combos.upper;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.elevator.elevatorDown;
 import frc.robot.commands.elevator.elevatorUp;
-// import frc.robot.commands.marquee.displayMessage;
+import frc.robot.commands.marquee.displayMessage;
 import frc.robot.commands.photon.*;
 import frc.robot.commands.pivot.pivotDown;
 import frc.robot.commands.pivot.pivotUp;
 import frc.robot.commands.rgb.*;
 import frc.robot.utilities.BNO055;
+
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -69,6 +75,9 @@ public class Robot extends TimedRobot {
   // public static final rgb m_upperRight = new rgb(3, 144);
   // public static final rgb m_rightRGB = new rgb(0, 144);
   // public static final rgb m_leftRGB = new rgb(1, 144);
+  UsbCamera camera = CameraServer.startAutomaticCapture();
+
+
 
   public static BNO055 imu;
   private BNO055.CalData cal;
@@ -176,8 +185,8 @@ public class Robot extends TimedRobot {
     new JoystickButton(xbox, Button.kY.value)
         .whileTrue(new elevatorUp(m_elevator));
 
-    // new JoystickButton(xbox, Button.kStart.value)
-    // .whileTrue(new reset());
+    new JoystickButton(xbox, Button.kBack.value)
+    .whileTrue(new hs());
     new JoystickButton(xbox, Button.kA.value)
         .whileTrue(new elevatorDown(m_elevator));
 
@@ -202,7 +211,7 @@ public class Robot extends TimedRobot {
         .whileTrue(new pivotDown(m_pivot));
 
     new JoystickButton(xbox, Button.kX.value)
-        .whileTrue(new pivotUp(m_pivot));
+      .whileTrue(new pivotUp(m_pivot));
     // new JoystickButton(xbox, Button.kX.value)
     // .onTrue(new driveStraight(m_drive, 12.0, m_drive.getAverageDistance()));
 
@@ -254,15 +263,6 @@ public class Robot extends TimedRobot {
 
   }
 
-  public Command getAutonomousCommand() {
-    Command cmd = null;
-String position = "middle";
-switch(position){
-  case "middle":
-
-}
-    return null;
-  }
 
   /**
    * This autonomous runs the autonomous command selected by your
