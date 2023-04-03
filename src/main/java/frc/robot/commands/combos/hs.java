@@ -14,7 +14,7 @@ public class hs extends SequentialCommandGroup {
 
     public hs() {
         addCommands(
-            Commands.parallel(new elevatorGoTo(Robot.m_elevator, Constants.elevatorUpper),
+            Commands.parallel(new elevatorGoTo(Robot.m_elevator, Constants.elevatorHs),
             new pivotGoTo(Robot.m_pivot, Constants.pivotHs)),
             new armOut(Robot.m_arm)
         );

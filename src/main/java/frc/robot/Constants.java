@@ -57,10 +57,11 @@ public final class Constants {
 
     //cone high rung
     public static final double pivotUpper = 60;
-    public static final double elevatorUpper = -27;
+    public static final double elevatorUpper = -23;
 
     //human station
-    public static final double pivotHs = 85;
+    public static final double elevatorHs = -25;
+    public static final double pivotHs = 90;
     //drivetrain encoder calculations
     public static final double wheelDiameter = 6; //inches
     public static final double wheelCircumference = wheelDiameter * Math.PI;
@@ -73,14 +74,14 @@ public final class Constants {
 
     //motor speeds
     public static final double intakeSpeedIn = 0.05;
-    public static final double intakeSpeedOut = -0.2;
+    public static final double intakeSpeedOut = -0.1;
     public static final double intakeSpeedStop = 0;
-    public static final double intakeMultiplier = 0.6;
+    public static final double intakeMultiplier = 0.4;
 
     public static final double pivotSpeedUp = -0.8;
     public static final double pivotSpeedDown = 0.6;
-    public static final double elevatorUp = -0.2;
-    public static final double elevatorDown = 0.1;
+    public static final double elevatorUp = -0.2; //-0.2
+    public static final double elevatorDown = 0.1; //0.1
     
 
     // Marquee Commands

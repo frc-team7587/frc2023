@@ -74,19 +74,20 @@ public class Robot extends TimedRobot {
   // public static final rgb m_lowerLeft = new rgb(2, 144);
   // public static final rgb m_upperRight = new rgb(3, 144);
   // public static final rgb m_rightRGB = new rgb(0, 144);
-  // public static final rgb m_leftRGB = new rgb(1, 144);
+  public static final rgb m_rgb = new rgb(1, 300);
   UsbCamera camera = CameraServer.startAutomaticCapture();
 
 
 
-  public static BNO055 imu;
-  private BNO055.CalData cal;
-  private DecimalFormat f = new DecimalFormat("+000.000;-000.000");
-  public static double[] pos = new double[3]; // [x,y,z] position data
+  // public static BNO055 imu;
+  // private BNO055.CalData cal;
+  // private DecimalFormat f = new DecimalFormat("+000.000;-000.000");
+  // public static double[] pos = new double[3]; // [x,y,z] position data
   private autonomous auto = new autonomous();
 
   public final static SendableChooser<String> m_chooser = new SendableChooser<>();
   public final static SendableChooser<String> m_teamColorChooser = new SendableChooser<>();
+  public static double level;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -106,12 +107,21 @@ public class Robot extends TimedRobot {
     m_teamColorChooser.addOption("Red", "Red");
     SmartDashboard.putData(m_teamColorChooser);
 
-    imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
-        BNO055.vector_type_t.VECTOR_EULER);
+    // imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
+    //     BNO055.vector_type_t.VECTOR_EULER);
+    // pos = imu.getVector();
 
-    System.out.println("Sensor present" + imu.isSensorPresent());
-    System.out.println("Initialize complete" + imu.isInitialized());
-    System.out.println("calibrated" + imu.isCalibrated());
+    // if(imu.isInitialized()) {
+    //   level = (imu.getVector()[1]);
+    // } else {
+    //   level = 58.125;
+    // }
+
+    // System.out.println("LEVEL: " + level);
+
+    // System.out.println("Sensor present" + imu.isSensorPresent());
+    // System.out.println("Initialize complete" + imu.isInitialized());
+    // System.out.println("calibrated" + imu.isCalibrated());
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -125,7 +135,7 @@ public class Robot extends TimedRobot {
 
     m_drive.setDefaultCommand(new defaultDrive(m_drive));
     m_intake.setDefaultCommand(new intakeDefault(m_intake));
-    // m_leftRGB.setDefaultCommand(new defaultRGB(m_leftRGB));
+    m_rgb.setDefaultCommand(new rainbow(m_rgb));
     // m_rightRGB.setDefaultCommand(new defaultRGB(m_rightRGB));
   }
 
@@ -146,10 +156,16 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     // System.out.println("Pivot: " + m_pivot.getPivot());
     // System.out.println("Elevator: " + m_elevator.getElevator());
-    // pos = imu.getVector();
+    // if (pos[1] > 20 && pos[1] < 120) {
+      // pos = imu.getVector();
+    // System.out.println("Sensor present" + imu.isSensorPresent());
+    // System.out.println("Initialize complete" + imu.isInitialized());
+    // System.out.println("calibrated" + imu.isCalibrated());
+   
+    // System.out.println("pitch: " + pos[1]);
     // photon.isConnected();
     // System.out.println(m_drive.getAverageDistance());
-    System.out.println(m_drive.getAverageDistance());
+    // System.out.println(m_drive.getAverageDistance());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -163,9 +179,9 @@ public class Robot extends TimedRobot {
     // pos = imu.getVector();
 
     // /* Display the floating point data */
-    // System.out.println("\tX: " + f.format(pos[0])
-    // + " Y: " + f.format(pos[1]) + " Z: " + f.format(pos[2])
-    // + " H: " + imu.getHeading());
+ 
+    
+
 
     // /* Display calibration status for each sensor. */
     // cal = imu.getCalibration();
@@ -179,6 +195,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    new defaultRGB(m_rgb);
+
   }
 
   private void configureButtonBindings() {
@@ -187,6 +205,7 @@ public class Robot extends TimedRobot {
 
     new JoystickButton(xbox, Button.kBack.value)
     .whileTrue(new hs());
+
     new JoystickButton(xbox, Button.kA.value)
         .whileTrue(new elevatorDown(m_elevator));
 
@@ -212,11 +231,16 @@ public class Robot extends TimedRobot {
 
     new JoystickButton(xbox, Button.kX.value)
       .whileTrue(new pivotUp(m_pivot));
+
+    
     // new JoystickButton(xbox, Button.kX.value)
     // .onTrue(new driveStraight(m_drive, 12.0, m_drive.getAverageDistance()));
 
     // new JoystickButton(xbox, Button.kA.value)
     // .onTrue(new telescopeGoTo(m_arm, 0));
+
+    // new JoystickButton(logi, 2)
+    //   .onTrue(new driveStraight(m_drive, 50, Robot.m_drive.getAverageDistance()));
 
     new JoystickButton(xbox, Button.kStart.value)
         .onTrue(new home());
@@ -226,11 +250,23 @@ public class Robot extends TimedRobot {
     // new JoystickButton(logi, 7)
     // .toggleOnTrue(new displayMessage(m_marquee));
 
-    // new JoystickButton(logi, 1)
-    // .whileTrue(Commands.parallel(new yellow(m_leftRGB), new yellow(m_rightRGB)));
+    new JoystickButton(logi, 5)
+    .whileTrue(new yellow(m_rgb));
 
-    // new JoystickButton(logi, 2)
-    // .whileTrue(Commands.parallel(new purple(m_leftRGB), new purple(m_rightRGB)));
+    // new JoystickButton(logi, 1)
+    //   .onTrue(new driveTrackApril(m_drive));
+
+    new JoystickButton(logi, 2)
+    .whileTrue(new rainbow(m_rgb));
+
+    new JoystickButton(logi, 3)
+      .whileTrue(new purple(m_rgb));
+
+    // new JoystickButton(logi, 4)
+    //   .onTrue(new setApril(photon));
+
+    // new JoystickButton(logi, 6)
+    //   .onTrue(new setReflective(photon));
     // new JoystickButton(logi, 5)
     // .whileTrue(Commands.parallel(new rainbow(m_leftRGB), new
     // rainbow(m_rightRGB)));
