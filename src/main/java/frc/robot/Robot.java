@@ -105,7 +105,7 @@ public class Robot extends TimedRobot {
 
     m_teamColorChooser.setDefaultOption("Blue", "Blue");
     m_teamColorChooser.addOption("Red", "Red");
-    SmartDashboard.putData(m_teamColorChooser);
+    // SmartDashboard.putData(m_teamC ssxxxxxxxxxxxxxxxxolorChooser);
 
     // imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
     //     BNO055.vector_type_t.VECTOR_EULER);
@@ -203,23 +203,23 @@ public class Robot extends TimedRobot {
     new JoystickButton(xbox, Button.kY.value)
         .whileTrue(new elevatorUp(m_elevator));
 
-    new JoystickButton(xbox, Button.kBack.value)
-    .whileTrue(new hs());
+    // new JoystickButton(xbox, Button.kBack.value)
+    // .whileTrue(new hs());
 
     new JoystickButton(xbox, Button.kA.value)
         .whileTrue(new elevatorDown(m_elevator));
 
-    new JoystickButton(xbox, Button.kLeftBumper.value)
-        .onTrue(new armIn(m_arm));
+      new JoystickButton(xbox, Button.kLeftBumper.value)
+          .onTrue(new armIn(m_arm));
 
-    // new JoystickButton(xbox, Button.kLeftBumper.value)
-    // .onTrue(new driveStraight(m_drive, 12.0, m_drive.getAverageDistance()));
+    // // new JoystickButton(xbox, Button.kLeftBumper.value)
+    // // .onTrue(new driveStraight(m_drive, 12.0, m_drive.getAverageDistance()));
 
-    new JoystickButton(xbox, Button.kLeftStick.value)
-        .onTrue(new upper());
+    // new JoystickButton(xbox, Button.kLeftStick.value)
+    //     .onTrue(new upper());
 
-    new JoystickButton(xbox, Button.kRightStick.value)
-        .onTrue(new mid());
+    // new JoystickButton(xbox, Button.kRightStick.value)
+    //     .onTrue(new mid());
 
     // new JoystickButton(xbox, Button.kY.value)
     // .whileTrue(new pivotUp(m_pivot));
@@ -242,8 +242,8 @@ public class Robot extends TimedRobot {
     // new JoystickButton(logi, 2)
     //   .onTrue(new driveStraight(m_drive, 50, Robot.m_drive.getAverageDistance()));
 
-    new JoystickButton(xbox, Button.kStart.value)
-        .onTrue(new home());
+    // new JoystickButton(xbox, Button.kStart.value)
+    //     .onTrue(new home());
     // new JoystickButton(xbox, Button.kBack.value)
     // .onTrue(new driveTrackApril(m_drive));
 
