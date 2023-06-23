@@ -10,9 +10,9 @@ public class reset extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.m_pivot.resetPivot();
-        Robot.m_intake.resetIntake();
-        Robot.m_elevator.resetElevator();
+        Robot.pivot.resetPivot();
+        Robot.intake.resetIntake();
+        Robot.elevator.resetElevator();
     }
 
     @Override

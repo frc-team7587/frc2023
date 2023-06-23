@@ -10,13 +10,11 @@ import frc.robot.commands.elevator.elevatorGoTo;
 import frc.robot.Constants;
 
 public class hs extends SequentialCommandGroup {
-
-
     public hs() {
         addCommands(
-            Commands.parallel(new elevatorGoTo(Robot.m_elevator, Constants.elevatorHs),
-            new pivotGoTo(Robot.m_pivot, Constants.pivotHs)),
-            new armOut(Robot.m_arm)
+            Commands.parallel(new elevatorGoTo(Robot.elevator, Constants.elevatorHs),
+            new pivotGoTo(Robot.pivot, Constants.pivotHs)),
+            new armOut(Robot.arm)
         );
     }
 }

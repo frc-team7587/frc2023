@@ -2,11 +2,12 @@ package frc.robot.commands.rgb;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.rgb;
+import frc.robot.subsystems.RGB;
 
-public class rainbow extends CommandBase{
-    private final rgb rgb;
-    public rainbow(rgb subsystem) {
+public class rainbow extends CommandBase {
+    private final RGB rgb;
+
+    public rainbow(RGB subsystem) {
         addRequirements(subsystem);
         rgb = subsystem;
     }
@@ -14,10 +15,11 @@ public class rainbow extends CommandBase{
     @Override
     public void execute() {
         rgb.setRainbow();
-        
+
     }
 
     @Override
     public void end(boolean interrupted) {
+
     }
-} 
+}

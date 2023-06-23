@@ -1,12 +1,12 @@
 package frc.robot.commands.photon;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.photon;
+import frc.robot.subsystems.Photon;
 
 public class setReflective extends CommandBase{
+    private final Photon photon;
 
-    private final photon photon;
-    public setReflective(photon subsystem) {
+    public setReflective(Photon subsystem) {
         addRequirements(subsystem);
         photon = subsystem;
     }
@@ -15,5 +15,4 @@ public class setReflective extends CommandBase{
     public void execute() {
         photon.setReflective();
     }
-    
 }

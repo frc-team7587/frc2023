@@ -9,14 +9,11 @@ import frc.robot.commands.arm.armIn;
 import frc.robot.commands.elevator.elevatorGoTo;
 
 public class home extends SequentialCommandGroup {
-
-
     public home() {
         addCommands(
-            new armIn(Robot.m_arm).withTimeout(0.5),
-            Commands.parallel(new pivotGoTo(Robot.m_pivot, 0),
-            new elevatorGoTo(Robot.m_elevator, 0))
-            
+            new armIn(Robot.arm).withTimeout(0.5),
+            Commands.parallel(new pivotGoTo(Robot.pivot, 0),
+            new elevatorGoTo(Robot.elevator, 0))
         );
     }
 }

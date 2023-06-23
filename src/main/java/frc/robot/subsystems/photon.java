@@ -1,16 +1,15 @@
 package frc.robot.subsystems;
 
-import org.photonvision.PhotonCamera;
-import org.photonvision.PhotonUtils;
+import static frc.robot.Constants.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.Constants.*;
 
-public class photon extends SubsystemBase {
-    
+import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonUtils;
+
+public class Photon extends SubsystemBase {
     public static final PhotonCamera camera = new PhotonCamera(cameraName);
-    
 
     public void isConnected() {
         System.out.println("Camera connected: " + camera.isConnected());
@@ -25,10 +24,9 @@ public class photon extends SubsystemBase {
     }
 
     public double getAprilYaw() {
-
         camera.setPipelineIndex(aprilPipeline);
 
-        if(camera.getLatestResult().hasTargets()) {
+        if (camera.getLatestResult().hasTargets()) {
             return camera.getLatestResult().getBestTarget().getYaw();
         }
 
@@ -41,13 +39,12 @@ public class photon extends SubsystemBase {
     }
 
     public double getDistance() {
-        
-        return PhotonUtils.calculateDistanceToTargetMeters(CAMERA_HEIGHT_METERS, TARGET_HEIGHT_METERS, CAMERA_PITCH_RADIANS, camera.getLatestResult().getBestTarget().getPitch());
+        return PhotonUtils.calculateDistanceToTargetMeters(CAMERA_HEIGHT_METERS, TARGET_HEIGHT_METERS,
+                CAMERA_PITCH_RADIANS, camera.getLatestResult().getBestTarget().getPitch());
     }
 
     public double getYaw() {
-
-        if(camera.getLatestResult().hasTargets()) {
+        if (camera.getLatestResult().hasTargets()) {
             return camera.getLatestResult().getBestTarget().getYaw();
         }
 
@@ -60,10 +57,10 @@ public class photon extends SubsystemBase {
     }
 
     public double getReflectiveDistance() {
-        
         camera.setPipelineIndex(reflectivePipeline);
 
-        return PhotonUtils.calculateDistanceToTargetMeters(CAMERA_HEIGHT_METERS, TARGET_HEIGHT_METERS, CAMERA_PITCH_RADIANS, camera.getLatestResult().getBestTarget().getPitch());
+        return PhotonUtils.calculateDistanceToTargetMeters(CAMERA_HEIGHT_METERS, TARGET_HEIGHT_METERS,
+                CAMERA_PITCH_RADIANS, camera.getLatestResult().getBestTarget().getPitch());
     }
 
     @Override
@@ -73,5 +70,4 @@ public class photon extends SubsystemBase {
         camera.setPipelineIndex(reflectivePipeline);
         SmartDashboard.putBoolean("Reflective Target", camera.getLatestResult().hasTargets());
     }
-
 }

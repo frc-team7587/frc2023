@@ -2,13 +2,13 @@ package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.arm;
+import frc.robot.subsystems.Arm;
 
 
 public class armOut extends CommandBase {
-    private final arm arm;
+    private final Arm arm;
 
-    public armOut(arm subsystem) {
+    public armOut(Arm subsystem) {
         addRequirements(subsystem);
         arm = subsystem;
     }

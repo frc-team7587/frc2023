@@ -2,18 +2,17 @@ package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
-import frc.robot.subsystems.drivetrain;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 
 public class driveTrackApril extends PIDCommand {
-    
-    public driveTrackApril(drivetrain m_drive) {
+    public driveTrackApril(DriveTrain drive) {
         super(new PIDController(0.0075, 0.005, 0),
         
             () -> Robot.photon.getYaw(),
             12,
-            (output) -> m_drive.drive(0, output),
-            m_drive);
+            (output) -> drive.drive(0, output),
+            drive);
         
             getController().enableContinuousInput(-180, 180);
             getController().setTolerance(1, 0);

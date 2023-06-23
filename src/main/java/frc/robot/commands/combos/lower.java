@@ -10,7 +10,6 @@ import frc.robot.commands.elevator.elevatorGoTo;
 import frc.robot.Constants;
 
 public class lower extends SequentialCommandGroup {
-
     public lower() {
       
     }

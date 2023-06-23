@@ -12,12 +12,10 @@ import frc.robot.commands.elevator.elevatorGoTo;
 import frc.robot.Constants;
 
 public class mid extends SequentialCommandGroup {
-
-
     public mid() {
         addCommands(
-            Commands.parallel(new elevatorGoTo(Robot.m_elevator, Constants.elevatorMid),
-            new pivotGoTo(Robot.m_pivot, Constants.pivotMid))
+            Commands.parallel(new elevatorGoTo(Robot.elevator, Constants.elevatorMid),
+            new pivotGoTo(Robot.pivot, Constants.pivotMid))
             // new armIn(Robot.m_arm)
         );
         // super(
