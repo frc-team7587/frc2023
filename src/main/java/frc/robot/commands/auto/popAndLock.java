@@ -7,7 +7,7 @@ import frc.robot.commands.intake.intakeGoTo;
 public class popAndLock extends SequentialCommandGroup{
     public popAndLock() {
         addCommands(
-        new intakeGoTo(Robot.m_intake, 0.5),
-        new intakeGoTo(Robot.m_intake, 0));
+        new intakeGoTo(Robot.intake, 0.5),
+        new intakeGoTo(Robot.intake, 0));
     }
 }
