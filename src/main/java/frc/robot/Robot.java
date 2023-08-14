@@ -29,14 +29,14 @@ import java.text.DecimalFormat;
 import frc.robot.commands.intake.*;
 import frc.robot.commands.arm.*;
 import frc.robot.commands.auto.Autonomous;
-import frc.robot.commands.combos.home;
-import frc.robot.commands.combos.hs;
-import frc.robot.commands.combos.mid;
-import frc.robot.commands.combos.reset;
-import frc.robot.commands.combos.upper;
+import frc.robot.commands.combos.Home;
+import frc.robot.commands.combos.HS;
+import frc.robot.commands.combos.Mid;
+import frc.robot.commands.combos.Reset;
+import frc.robot.commands.combos.Upper;
 import frc.robot.commands.drivetrain.*;
-import frc.robot.commands.elevator.elevatorDown;
-import frc.robot.commands.elevator.elevatorUp;
+import frc.robot.commands.elevator.ElevatorDown;
+import frc.robot.commands.elevator.ElevatorUp;
 import frc.robot.commands.marquee.displayMessage;
 import frc.robot.commands.photon.*;
 import frc.robot.commands.pivot.pivotDown;
@@ -187,10 +187,10 @@ public class Robot extends TimedRobot {
 
     private void configureButtonBindings() {
         // Y: Elevator Up
-        new JoystickButton(xbox, Button.kY.value).whileTrue(new elevatorUp(elevator));
+        new JoystickButton(xbox, Button.kY.value).whileTrue(new ElevatorUp(elevator));
 
         // A: Elevator Down
-        new JoystickButton(xbox, Button.kA.value).whileTrue(new elevatorDown(elevator));
+        new JoystickButton(xbox, Button.kA.value).whileTrue(new ElevatorDown(elevator));
                 
         // B: Pivot Down
         new JoystickButton(xbox, Button.kB.value).whileTrue(new pivotDown(pivot));

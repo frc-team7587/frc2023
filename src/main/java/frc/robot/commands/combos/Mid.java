@@ -8,13 +8,13 @@ import frc.robot.Robot;
 import frc.robot.commands.pivot.pivotGoTo;
 import frc.robot.commands.arm.armIn;
 import frc.robot.commands.arm.armOut;
-import frc.robot.commands.elevator.elevatorGoTo;
+import frc.robot.commands.elevator.ElevatorGoTo;
 import frc.robot.Constants;
 
-public class mid extends SequentialCommandGroup {
-    public mid() {
+public class Mid extends SequentialCommandGroup {
+    public Mid() {
         addCommands(
-            Commands.parallel(new elevatorGoTo(Robot.elevator, Constants.elevatorMid),
+            Commands.parallel(new ElevatorGoTo(Robot.elevator, Constants.elevatorMid),
             new pivotGoTo(Robot.pivot, Constants.pivotMid))
             // new armIn(Robot.m_arm)
         );

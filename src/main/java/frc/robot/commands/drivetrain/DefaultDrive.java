@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 
-public class defaultDrive extends CommandBase {
+public class DefaultDrive extends CommandBase {
     private DriveTrain drive;
 
-    public defaultDrive(DriveTrain subsystem) {
+    public DefaultDrive(DriveTrain subsystem) {
         addRequirements(subsystem);
         drive = subsystem;
     }

@@ -3,10 +3,10 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Elevator;
 
-public class elevatorDown extends CommandBase {
+public class ElevatorDown extends CommandBase {
     private final Elevator elevator;
 
-    public elevatorDown(Elevator subsystem) {
+    public ElevatorDown(Elevator subsystem) {
         addRequirements(subsystem);
         elevator = subsystem;
     }

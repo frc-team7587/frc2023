@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.Elevator;
 
-public class elevatorGoTo extends PIDCommand {
+public class ElevatorGoTo extends PIDCommand {
     private double target;
 
-    public elevatorGoTo(Elevator subsystem, double target) {
+    public ElevatorGoTo(Elevator subsystem, double target) {
         super(new PIDController(0.04, 0, 0),
         () -> subsystem.getElevator(),
         target,

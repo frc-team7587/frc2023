@@ -3,8 +3,8 @@ package frc.robot.commands.combos;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class reset extends CommandBase {
-    public reset() {
+public class Reset extends CommandBase {
+    public Reset() {
         
     }
 

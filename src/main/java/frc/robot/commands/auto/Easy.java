@@ -8,31 +8,31 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.arm.armIn;
 import frc.robot.commands.arm.armOut;
-import frc.robot.commands.combos.autoRot;
-import frc.robot.commands.combos.home;
-import frc.robot.commands.combos.mid;
-import frc.robot.commands.combos.upper;
-import frc.robot.commands.drivetrain.driveStraight;
+import frc.robot.commands.combos.AutoRotate;
+import frc.robot.commands.combos.Home;
+import frc.robot.commands.combos.Mid;
+import frc.robot.commands.combos.Upper;
+import frc.robot.commands.drivetrain.DriveStraight;
 import frc.robot.commands.intake.intakeOut;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.pivot.pivotDown;
 import frc.robot.commands.pivot.pivotGoTo;
 import frc.robot.commands.rgb.rainbow;
-import frc.robot.commands.arm.armIn;
-import frc.robot.commands.elevator.elevatorGoTo;
+import frc.robot.commands.arm.ArmIn;
+import frc.robot.commands.elevator.ElevatorGoTo;
 import frc.robot.Constants;
 
-public class easy extends SequentialCommandGroup {
-    public easy() {
+public class Easy extends SequentialCommandGroup {
+    public Easy() {
         addCommands(
             // new mid(),
-            new upper().withTimeout(1),
+            new Upper().withTimeout(1),
             new armOut(Robot.arm).withTimeout(0.65),
             new pivotDown(Robot.pivot).withTimeout(0.5),
             new intakeOut(Robot.intake).withTimeout(1),
-            new home().withTimeout(2),
-            Commands.parallel(new driveStraight(Robot.drive, -130, Robot.drive.getAverageDistance()), new rainbow(Robot.rgb)).withTimeout(5),
-            new driveStraight(Robot.drive, 10, Robot.drive.getAverageDistance()).withTimeout(1.75)
+            new Home().withTimeout(2),
+            Commands.parallel(new DriveStraight(Robot.drive, -130, Robot.drive.getAverageDistance()), new rainbow(Robot.rgb)).withTimeout(5),
+            new DriveStraight(Robot.drive, 10, Robot.drive.getAverageDistance()).withTimeout(1.75)
             // -70 for just going on board
         );
         // new armOut(Robot.m_arm),

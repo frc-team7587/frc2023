@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 
-public class driveTrackReflective extends PIDCommand {
-    public driveTrackReflective(DriveTrain m_drive) {
+public class DriveTrackReflective extends PIDCommand {
+    public DriveTrackReflective(DriveTrain m_drive) {
         super(new PIDController(0.01, 0, 0),
         
             () -> Robot.photon.getYaw(),

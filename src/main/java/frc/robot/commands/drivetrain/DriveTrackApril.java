@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 
-public class driveTrackApril extends PIDCommand {
-    public driveTrackApril(DriveTrain drive) {
+public class DriveTrackApril extends PIDCommand {
+    public DriveTrackApril(DriveTrain drive) {
         super(new PIDController(0.0075, 0.005, 0),
         
             () -> Robot.photon.getYaw(),

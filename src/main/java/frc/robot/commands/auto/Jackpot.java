@@ -5,17 +5,17 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.arm.armIn;
 import frc.robot.commands.arm.armOut;
-import frc.robot.commands.drivetrain.driveStraight;
+import frc.robot.commands.drivetrain.DriveStraight;
 import frc.robot.commands.intake.intakeOut;
 
-public class jackpot extends SequentialCommandGroup{
-    public jackpot() {
+public class Jackpot extends SequentialCommandGroup {
+    public Jackpot() {
         addCommands(
-        new driveStraight(Robot.drive, 60.69, Robot.drive.getAverageDistance()),
+        new DriveStraight(Robot.drive, 60.69, Robot.drive.getAverageDistance()),
         new armOut(Robot.arm),
         new intakeOut(Robot.intake),
         new armIn(Robot.arm),
-        new driveStraight(Robot.drive, -60.69, Robot.drive.getAverageDistance())
+        new DriveStraight(Robot.drive, -60.69, Robot.drive.getAverageDistance())
         );
     }
 }

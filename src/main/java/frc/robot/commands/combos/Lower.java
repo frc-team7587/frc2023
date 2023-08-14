@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.pivot.pivotGoTo;
 import frc.robot.commands.arm.armOut;
-import frc.robot.commands.elevator.elevatorGoTo;
+import frc.robot.commands.elevator.ElevatorGoTo;
 import frc.robot.Constants;
 
-public class lower extends SequentialCommandGroup {
-    public lower() {
+public class Lower extends SequentialCommandGroup {
+    public Lower() {
       
     }
 }

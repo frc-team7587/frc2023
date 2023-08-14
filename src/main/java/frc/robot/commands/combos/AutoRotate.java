@@ -8,20 +8,19 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.arm.armIn;
-import frc.robot.commands.elevator.elevatorGoTo;
+import frc.robot.commands.elevator.ElevatorGoTo;
 import frc.robot.commands.pivot.pivotDown;
 import frc.robot.commands.pivot.pivotGoTo;
 import frc.robot.commands.pivot.pivotUp;
 import frc.robot.subsystems.DriveTrain;
 
-public class autoRot {
+public class AutoRotate {
     // private final pivotDown pivotDown;
     // private final pivotUp pivotUp;
     // private final pivotGoTo goTo;
 
-
-    public autoRot() {
-        new elevatorGoTo(Robot.elevator, Constants.elevatorMid);
+    public AutoRotate() {
+        new ElevatorGoTo(Robot.elevator, Constants.elevatorMid);
         new pivotGoTo(Robot.pivot, Constants.pivotMid);
         new armIn(Robot.arm);
     }

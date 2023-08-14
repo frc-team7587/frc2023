@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 
-public class driveStraight extends PIDCommand {
+public class DriveStraight extends PIDCommand {
     private final DriveTrain drive;
     private final double target;
 
-    public driveStraight(DriveTrain drive, double distance, double current) {
+    public DriveStraight(DriveTrain drive, double distance, double current) {
         super(new PIDController(0.005, 0.001, 0),
         
             () -> drive.getAverageDistance(),

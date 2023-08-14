@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 
 
-public class armIn extends CommandBase {
+public class ArmIn extends CommandBase {
     private final Arm arm;
 
-    public armIn(Arm subsystem) {
+    public ArmIn(Arm subsystem) {
         addRequirements(subsystem);
         arm = subsystem;
     }
@@ -21,5 +21,5 @@ public class armIn extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         arm.off();
-  }
+    }
 }

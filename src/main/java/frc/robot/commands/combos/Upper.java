@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
 import frc.robot.commands.pivot.pivotGoTo;
 import frc.robot.commands.arm.armOut;
-import frc.robot.commands.elevator.elevatorGoTo;
+import frc.robot.commands.elevator.ElevatorGoTo;
 import frc.robot.Constants;
 
-public class upper extends SequentialCommandGroup {
-    public upper() {
+public class Upper extends SequentialCommandGroup {
+    public Upper() {
         addCommands(
-            Commands.parallel(new elevatorGoTo(Robot.elevator, Constants.elevatorUpper),
+            Commands.parallel(new ElevatorGoTo(Robot.elevator, Constants.elevatorUpper),
             new pivotGoTo(Robot.pivot, Constants.pivotUpper)),
             new armOut(Robot.arm)
         );
