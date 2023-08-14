@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-import frc.robot.commands.arm.armIn;
-import frc.robot.commands.arm.armOut;
+import frc.robot.commands.arm.ArmIn;
+import frc.robot.commands.arm.ArmOut;
 import frc.robot.commands.combos.AutoRotate;
 import frc.robot.commands.combos.Home;
 import frc.robot.commands.combos.Mid;
@@ -27,7 +27,7 @@ public class Easy extends SequentialCommandGroup {
         addCommands(
             // new mid(),
             new Upper().withTimeout(1),
-            new armOut(Robot.arm).withTimeout(0.65),
+            new ArmOut(Robot.arm).withTimeout(0.65),
             new pivotDown(Robot.pivot).withTimeout(0.5),
             new intakeOut(Robot.intake).withTimeout(1),
             new Home().withTimeout(2),

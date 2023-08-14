@@ -126,7 +126,7 @@ public class Robot extends TimedRobot {
         configureButtonBindings();
         photon.setApril();
 
-        drive.setDefaultCommand(new defaultDrive(drive));
+        drive.setDefaultCommand(new DefaultDrive(drive));
         intake.setDefaultCommand(new intakeDefault(intake));
         rgb.setDefaultCommand(new rainbow(rgb));
         // m_rightRGB.setDefaultCommand(new defaultRGB(m_rightRGB));
@@ -199,10 +199,10 @@ public class Robot extends TimedRobot {
         new JoystickButton(xbox, Button.kX.value).whileTrue(new pivotUp(pivot));
 
         // Left Bumper: Arm In
-        new JoystickButton(xbox, Button.kLeftBumper.value).onTrue(new armIn(arm));
+        new JoystickButton(xbox, Button.kLeftBumper.value).onTrue(new ArmIn(arm));
 
         // Right Bumper: Arm Out
-        new JoystickButton(xbox, Button.kRightBumper.value).onTrue(new armOut(arm));
+        new JoystickButton(xbox, Button.kRightBumper.value).onTrue(new ArmOut(arm));
 
         // RGB Buttons
         // new JoystickButton(joystick, 1).whileTrue(new red(rgb));

@@ -14,7 +14,7 @@ public class Upper extends SequentialCommandGroup {
         addCommands(
             Commands.parallel(new ElevatorGoTo(Robot.elevator, Constants.elevatorUpper),
             new pivotGoTo(Robot.pivot, Constants.pivotUpper)),
-            new armOut(Robot.arm)
+            new ArmOut(Robot.arm)
         );
     }
 }
