@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.commands.arm.armIn;
+import frc.robot.commands.arm.ArmIn;
 import frc.robot.commands.elevator.ElevatorGoTo;
 import frc.robot.commands.pivot.pivotDown;
 import frc.robot.commands.pivot.pivotGoTo;
@@ -22,10 +22,10 @@ public class AutoRotate {
     public AutoRotate() {
         new ElevatorGoTo(Robot.elevator, Constants.elevatorMid);
         new pivotGoTo(Robot.pivot, Constants.pivotMid);
-        new armIn(Robot.arm);
+        new ArmIn(Robot.arm);
     }
 
-    private void addCommands(CommandBase parallel, armIn armIn) {
+    private void addCommands(CommandBase parallel, ArmIn armIn) {
     }
 
     // @Override
