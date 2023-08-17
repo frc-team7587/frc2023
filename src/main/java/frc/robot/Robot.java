@@ -134,7 +134,7 @@ public class Robot extends TimedRobot {
     photon.setApril();
 
     m_drive.setDefaultCommand(new defaultDrive(m_drive));
-    m_intake.setDefaultCommand(new intakeDefault(m_intake));
+    m_intake.setDefaultCommand(new IntakeDefault(m_intake));
     m_rgb.setDefaultCommand(new rainbow(m_rgb));
     // m_rightRGB.setDefaultCommand(new defaultRGB(m_rightRGB));
   }

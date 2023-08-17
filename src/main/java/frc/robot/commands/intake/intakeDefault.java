@@ -6,11 +6,11 @@ import frc.robot.Robot;
 import frc.robot.subsystems.intake;
 import static frc.robot.Constants.*;
 
-public class intakeDefault extends CommandBase{
+public class IntakeDefault extends CommandBase{
 
     private final intake intake;
     
-    public intakeDefault(intake subsystem) {
+    public IntakeDefault(intake subsystem) {
         addRequirements(subsystem);
         intake = subsystem;
     }
