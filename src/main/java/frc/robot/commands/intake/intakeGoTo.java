@@ -4,9 +4,9 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.intake;
 
-public class intakeGoTo extends PIDCommand {
+public class IntakeGoTo extends PIDCommand {
 
-    public intakeGoTo(intake subsystem, double target) {
+    public IntakeGoTo(intake subsystem, double target) {
         super(new PIDController(0.3, 0, 0),
         () -> subsystem.getIntake(),
         target,
