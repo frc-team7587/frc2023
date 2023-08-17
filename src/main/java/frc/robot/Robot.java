@@ -38,10 +38,10 @@ import frc.robot.commands.combos.upper;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.elevator.elevatorDown;
 import frc.robot.commands.elevator.elevatorUp;
-import frc.robot.commands.marquee.displayMessage;
+import frc.robot.commands.marquee.DisplayMessage;
 import frc.robot.commands.photon.*;
-import frc.robot.commands.pivot.pivotDown;
-import frc.robot.commands.pivot.pivotUp;
+import frc.robot.commands.pivot.PivotDown;
+import frc.robot.commands.pivot.PivotUp;
 import frc.robot.commands.rgb.*;
 import frc.robot.utilities.BNO055;
 
@@ -135,7 +135,7 @@ public class Robot extends TimedRobot {
 
     m_drive.setDefaultCommand(new defaultDrive(m_drive));
     m_intake.setDefaultCommand(new IntakeDefault(m_intake));
-    m_rgb.setDefaultCommand(new rainbow(m_rgb));
+    m_rgb.setDefaultCommand(new Rainbow(m_rgb));
     // m_rightRGB.setDefaultCommand(new defaultRGB(m_rightRGB));
   }
 
@@ -195,7 +195,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    new defaultRGB(m_rgb);
+    new DefaultRGB(m_rgb);
 
   }
 
@@ -227,10 +227,10 @@ public class Robot extends TimedRobot {
         .onTrue(new armOut(m_arm));
 
     new JoystickButton(xbox, Button.kB.value)
-        .whileTrue(new pivotDown(m_pivot));
+        .whileTrue(new PivotDown(m_pivot));
 
     new JoystickButton(xbox, Button.kX.value)
-      .whileTrue(new pivotUp(m_pivot));
+      .whileTrue(new PivotUp(m_pivot));
 
     
     // new JoystickButton(xbox, Button.kX.value)
@@ -251,16 +251,16 @@ public class Robot extends TimedRobot {
     // .toggleOnTrue(new displayMessage(m_marquee));
 
     new JoystickButton(logi, 5)
-    .whileTrue(new yellow(m_rgb));
+    .whileTrue(new Yellow(m_rgb));
 
     // new JoystickButton(logi, 1)
     //   .onTrue(new driveTrackApril(m_drive));
 
     new JoystickButton(logi, 2)
-    .whileTrue(new rainbow(m_rgb));
+    .whileTrue(new Rainbow(m_rgb));
 
     new JoystickButton(logi, 3)
-      .whileTrue(new purple(m_rgb));
+      .whileTrue(new Purple(m_rgb));
 
     // new JoystickButton(logi, 4)
     //   .onTrue(new setApril(photon));

@@ -13,11 +13,11 @@ import frc.robot.commands.combos.home;
 import frc.robot.commands.combos.mid;
 import frc.robot.commands.combos.upper;
 import frc.robot.commands.drivetrain.driveStraight;
-import frc.robot.commands.intake.intakeOut;
+import frc.robot.commands.intake.IntakeOut;
 import frc.robot.subsystems.drivetrain;
-import frc.robot.commands.pivot.pivotDown;
-import frc.robot.commands.pivot.pivotGoTo;
-import frc.robot.commands.rgb.rainbow;
+import frc.robot.commands.pivot.PivotDown;
+import frc.robot.commands.pivot.PivotGoTo;
+import frc.robot.commands.rgb.Rainbow;
 import frc.robot.commands.arm.armIn;
 import frc.robot.commands.elevator.elevatorGoTo;
 import frc.robot.Constants;
@@ -29,10 +29,10 @@ public class easy extends SequentialCommandGroup {
                 // new mid(),
                 new upper().withTimeout(1),
                 new armOut(Robot.m_arm).withTimeout(0.65),
-                new pivotDown(Robot.m_pivot).withTimeout(0.5),
-                new intakeOut(Robot.m_intake).withTimeout(1),
+                new PivotDown(Robot.m_pivot).withTimeout(0.5),
+                new IntakeOut(Robot.m_intake).withTimeout(1),
                 new home().withTimeout(2),
-                Commands.parallel(new driveStraight(Robot.m_drive, -130, Robot.m_drive.getAverageDistance()), new rainbow(Robot.m_rgb)).withTimeout(5),
+                Commands.parallel(new driveStraight(Robot.m_drive, -130, Robot.m_drive.getAverageDistance()), new Rainbow(Robot.m_rgb)).withTimeout(5),
                 new driveStraight(Robot.m_drive, 10, Robot.m_drive.getAverageDistance()).withTimeout(1.75)
 
                 //-70 for just going on board

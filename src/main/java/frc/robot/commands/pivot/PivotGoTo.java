@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.pivot;
 
-public class pivotGoTo extends PIDCommand {
+public class PivotGoTo extends PIDCommand {
 
 private double target;
 
-    public pivotGoTo(pivot subsystem, double target) {
+    public PivotGoTo(pivot subsystem, double target) {
         super(new PIDController(0.05, 0, 0),
         () -> subsystem.getPivot(),
         target,

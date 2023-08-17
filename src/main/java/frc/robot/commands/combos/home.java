@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-import frc.robot.commands.pivot.pivotGoTo;
+import frc.robot.commands.pivot.PivotGoTo;
 import frc.robot.commands.arm.armIn;
 import frc.robot.commands.elevator.elevatorGoTo;
 
@@ -14,7 +14,7 @@ public class home extends SequentialCommandGroup {
     public home() {
         addCommands(
             new armIn(Robot.m_arm).withTimeout(0.5),
-            Commands.parallel(new pivotGoTo(Robot.m_pivot, 0),
+            Commands.parallel(new PivotGoTo(Robot.m_pivot, 0),
             new elevatorGoTo(Robot.m_elevator, 0))
             
         );
