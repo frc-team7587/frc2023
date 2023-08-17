@@ -3,10 +3,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.*;
 import frc.robot.subsystems.marquee;
 
-public class displayMessage extends CommandBase {
+public class DisplayMessage extends CommandBase {
     private final marquee marquee;
     private int index = 0;
-    public displayMessage(marquee subsystem) {
+    public DisplayMessage(marquee subsystem) {
         addRequirements(subsystem);
         marquee = subsystem;
 
