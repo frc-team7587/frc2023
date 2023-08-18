@@ -6,21 +6,20 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 
 public class DriveTrackReflective extends PIDCommand {
-    public DriveTrackReflective(DriveTrain m_drive) {
+    public DriveTrackReflective(DriveTrain driveTrain) {
         super(new PIDController(0.01, 0, 0),
-        
             () -> Robot.photon.getYaw(),
             0,
-            (output) -> m_drive.drive(0, output),
-            m_drive);
+            (output) -> driveTrain.drive(0, output),
+            driveTrain);
         
             getController().enableContinuousInput(-180, 180);
             getController().setTolerance(1, 0);
-
     }
 
     @Override
     public void initialize() {
+        
     }
 
     @Override

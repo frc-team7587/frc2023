@@ -6,20 +6,19 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 
 public class DriveToReflective extends PIDCommand {
-    public DriveToReflective(DriveTrain m_drive) {
+    public DriveToReflective(DriveTrain drivedriveTrain) {
         super(new PIDController(0.01, 0, 0),
-        
             () -> Robot.photon.getReflectiveDistance(),
             0, //how far we want to be from reflective tape in meters
-            (output) -> m_drive.drive(output, 0),
-            m_drive);
+            (output) -> drivedriveTrain.drive(output, 0),
+            drivedriveTrain);
         
             getController().setTolerance(1, 0);
-
     }
 
     @Override
     public void initialize() {
+        
     }
 
     @Override

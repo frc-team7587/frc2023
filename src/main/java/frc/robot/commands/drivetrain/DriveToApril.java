@@ -6,14 +6,12 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 
 public class DriveToApril extends PIDCommand {
-    public DriveToApril(DriveTrain m_drive) {
+    public DriveToApril(DriveTrain driveTrain) {
         super(new PIDController(0.01, 0, 0),
-        
             () -> Robot.photon.getDistance(),
-            0.5, //how far we want to be from april tag in meters
-            (output) -> m_drive.drive(output, 0),
-            m_drive);
-        
+            0.5, // how far we want to be from april tag in meters
+            (output) -> driveTrain.drive(output, 0),
+            driveTrain);
             getController().setTolerance(1, 0);
 
     }

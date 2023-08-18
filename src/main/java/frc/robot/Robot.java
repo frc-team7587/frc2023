@@ -81,6 +81,7 @@ public class Robot extends TimedRobot {
     public final static SendableChooser<String> chooser = new SendableChooser<>();
     public final static SendableChooser<String> teamColorChooser = new SendableChooser<>();
     public static double level;
+    public static Object[] pos;
 
     /**
      * This function is run when the robot is first started up and should be used

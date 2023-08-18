@@ -6,21 +6,20 @@ import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 
 public class DriveStraight extends PIDCommand {
-    private final DriveTrain drive;
+    private final DriveTrain driveTrain;
     private final double target;
 
-    public DriveStraight(DriveTrain drive, double distance, double current) {
+    public DriveStraight(DriveTrain driveTrain, double distance, double current) {
         super(new PIDController(0.005, 0.001, 0),
-        
-            () -> drive.getAverageDistance(),
+            () -> driveTrain.getAverageDistance(),
             current + distance,
-            (output) -> drive.drive(output, 0),
-            drive);
+            (output) -> driveTrain.drive(output, 0),
+            driveTrain);
 
             // getController().enableContinuousInput(-180, 180);
             getController().setTolerance(1, 0);
 
-            this.drive = drive;
+            this.driveTrain = driveTrain;
             this.target = current + distance;
     }
 

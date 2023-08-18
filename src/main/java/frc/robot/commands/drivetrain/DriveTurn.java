@@ -2,26 +2,25 @@
 
 // import edu.wpi.first.math.controller.PIDController;
 // import edu.wpi.first.wpilibj2.command.PIDCommand;
-// import frc.robot.subsystems.drivetrain;
+// import frc.robot.subsystems.DriveTrain;
 // import frc.robot.Robot;
 
-// public class driveTurn extends PIDCommand {
+// public class DriveTurn extends PIDCommand {
     
-//     public driveTurn(drivetrain m_drive, double angle, double current) {
+//     public driveTurn(DriveTrain driveTrain, double angle, double current) {
 //         super(new PIDController(0.01, 0, 0),
-        
 //             () -> Robot.pos[0],
 //             current + angle,
-//             (output) -> m_drive.drive(0, output),
-//             m_drive);
+//             (output) -> driveTrain.drive(0, output),
+//             driveTrain);
         
 //             getController().enableContinuousInput(-180, 180);
 //             getController().setTolerance(1, 0);
-
 //     }
 
 //     @Override
 //     public void initialize() {
+    
 //     }
 
 //     @Override

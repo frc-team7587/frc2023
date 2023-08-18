@@ -6,21 +6,20 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.Robot;
 
 public class DriveTrackApril extends PIDCommand {
-    public DriveTrackApril(DriveTrain drive) {
+    public DriveTrackApril(DriveTrain driveTrain) {
         super(new PIDController(0.0075, 0.005, 0),
-        
             () -> Robot.photon.getYaw(),
             12,
-            (output) -> drive.drive(0, output),
-            drive);
+            (output) -> driveTrain.drive(0, output),
+            driveTrain);
         
             getController().enableContinuousInput(-180, 180);
             getController().setTolerance(1, 0);
-
     }
 
     @Override
     public void initialize() {
+        
     }
 
     @Override
