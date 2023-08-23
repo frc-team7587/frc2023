@@ -1,23 +1,25 @@
-package frc.robot.commands.pivot;
+package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Pivot;
 
-public class pivotUp extends CommandBase {
-    private final Pivot arm;
+import frc.robot.subsystems.Arm;
 
-    public pivotUp(Pivot subsystem) {
+
+public class ArmOut extends CommandBase {
+    private final Arm arm;
+
+    public ArmOut(Arm subsystem) {
         addRequirements(subsystem);
         arm = subsystem;
     }
 
     @Override
     public void execute() {
-        arm.pivotUp();
+        arm.armOut();
     }
 
     @Override
     public void end(boolean interrupted) {
-        arm.pivotStop();
+        arm.off();
     }
 }

@@ -1,13 +1,12 @@
 package frc.robot.commands.pivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.pivot;
+import frc.robot.subsystems.Pivot;
 
 public class pivotDown extends CommandBase {
-    
-    private final pivot arm;
+    private final Pivot arm;
 
-    public pivotDown(pivot subsystem) {
+    public pivotDown(Pivot subsystem) {
         addRequirements(subsystem);
         arm = subsystem;
     }
