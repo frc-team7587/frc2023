@@ -3,10 +3,10 @@ package frc.robot.commands.photon;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Photon;
 
-public class setApril extends CommandBase {
+public class SetApril extends CommandBase {
     private final Photon photon;
     
-    public setApril(Photon subsystem) {
+    public SetApril(Photon subsystem) {
         addRequirements(subsystem);
         photon = subsystem;
     }

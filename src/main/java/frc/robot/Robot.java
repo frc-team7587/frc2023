@@ -37,10 +37,10 @@ import frc.robot.commands.combos.Upper;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.elevator.ElevatorDown;
 import frc.robot.commands.elevator.ElevatorUp;
-import frc.robot.commands.marquee.displayMessage;
+import frc.robot.commands.marquee.DisplayMessage;
 import frc.robot.commands.photon.*;
-import frc.robot.commands.pivot.pivotDown;
-import frc.robot.commands.pivot.pivotUp;
+import frc.robot.commands.pivot.PivotDown;
+import frc.robot.commands.pivot.PivotUp;
 import frc.robot.commands.rgb.*;
 import frc.robot.utilities.BNO055;
 
@@ -128,8 +128,8 @@ public class Robot extends TimedRobot {
         photon.setApril();
 
         drive.setDefaultCommand(new DefaultDrive(drive));
-        intake.setDefaultCommand(new intakeDefault(intake));
-        rgb.setDefaultCommand(new rainbow(rgb));
+        intake.setDefaultCommand(new IntakeDefault(intake));
+        rgb.setDefaultCommand(new Rainbow(rgb));
         // m_rightRGB.setDefaultCommand(new defaultRGB(m_rightRGB));
     }
 
@@ -183,7 +183,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledPeriodic() {
-        new defaultRGB(rgb);
+        new DefaultRGB(rgb);
     }
 
     private void configureButtonBindings() {
@@ -194,10 +194,10 @@ public class Robot extends TimedRobot {
         new JoystickButton(xbox, Button.kA.value).whileTrue(new ElevatorDown(elevator));
                 
         // B: Pivot Down
-        new JoystickButton(xbox, Button.kB.value).whileTrue(new pivotDown(pivot));
+        new JoystickButton(xbox, Button.kB.value).whileTrue(new PivotDown(pivot));
 
         // X: Pivot Up
-        new JoystickButton(xbox, Button.kX.value).whileTrue(new pivotUp(pivot));
+        new JoystickButton(xbox, Button.kX.value).whileTrue(new PivotUp(pivot));
 
         // Left Bumper: Arm In
         new JoystickButton(xbox, Button.kLeftBumper.value).onTrue(new ArmIn(arm));
