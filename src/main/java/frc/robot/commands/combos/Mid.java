@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-import frc.robot.commands.pivot.pivotGoTo;
+import frc.robot.commands.pivot.PivotGoTo;
 import frc.robot.commands.arm.ArmIn;
 import frc.robot.commands.arm.ArmOut;
 import frc.robot.commands.elevator.ElevatorGoTo;
@@ -15,7 +15,7 @@ public class Mid extends SequentialCommandGroup {
     public Mid() {
         addCommands(
             Commands.parallel(new ElevatorGoTo(Robot.elevator, Constants.elevatorMid),
-            new pivotGoTo(Robot.pivot, Constants.pivotMid))
+            new PivotGoTo(Robot.pivot, Constants.pivotMid))
             // new armIn(Robot.m_arm)
         );
         // super(

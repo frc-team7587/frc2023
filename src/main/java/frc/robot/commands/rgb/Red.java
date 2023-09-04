@@ -4,22 +4,20 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.RGB;
 
-public class rainbow extends CommandBase {
+public class Red extends CommandBase{
     private final RGB rgb;
-
-    public rainbow(RGB subsystem) {
+    public Red(RGB subsystem) {
         addRequirements(subsystem);
         rgb = subsystem;
     }
 
     @Override
     public void execute() {
-        rgb.setRainbow();
-
+        rgb.setRed();
     }
 
     @Override
     public void end(boolean interrupted) {
-
+        
     }
 }

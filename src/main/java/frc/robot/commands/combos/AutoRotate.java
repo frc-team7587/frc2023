@@ -9,9 +9,9 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.commands.arm.ArmIn;
 import frc.robot.commands.elevator.ElevatorGoTo;
-import frc.robot.commands.pivot.pivotDown;
-import frc.robot.commands.pivot.pivotGoTo;
-import frc.robot.commands.pivot.pivotUp;
+import frc.robot.commands.pivot.PivotDown;
+import frc.robot.commands.pivot.PivotGoTo;
+import frc.robot.commands.pivot.PivotUp;
 import frc.robot.subsystems.DriveTrain;
 
 public class AutoRotate {
@@ -21,7 +21,7 @@ public class AutoRotate {
 
     public AutoRotate() {
         new ElevatorGoTo(Robot.elevator, Constants.elevatorMid);
-        new pivotGoTo(Robot.pivot, Constants.pivotMid);
+        new PivotGoTo(Robot.pivot, Constants.pivotMid);
         new ArmIn(Robot.arm);
     }
 
