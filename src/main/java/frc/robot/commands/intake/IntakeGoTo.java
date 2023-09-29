@@ -2,10 +2,11 @@ package frc.robot.commands.intake;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.intake;
 
-public class IntakeGoTo extends PIDCommand {
-    public IntakeGoTo(Intake subsystem, double target) {
+public class intakeGoTo extends PIDCommand {
+
+    public intakeGoTo(intake subsystem, double target) {
         super(new PIDController(0.3, 0, 0),
         () -> subsystem.getIntake(),
         target,
@@ -20,4 +21,5 @@ public class IntakeGoTo extends PIDCommand {
     public boolean isFinished() {
         return getController().atSetpoint();
     }
+    
 }

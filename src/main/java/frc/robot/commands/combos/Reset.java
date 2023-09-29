@@ -3,16 +3,16 @@ package frc.robot.commands.combos;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class Reset extends CommandBase {
-    public Reset() {
+public class reset extends CommandBase {
+    public reset() {
         
     }
 
     @Override
     public void execute() {
-        Robot.pivot.resetPivot();
-        Robot.intake.resetIntake();
-        Robot.elevator.resetElevator();
+        Robot.m_pivot.resetPivot();
+        Robot.m_intake.resetIntake();
+        Robot.m_elevator.resetElevator();
     }
 
     @Override

@@ -60,8 +60,8 @@ public final class Constants {
     public static final double elevatorUpper = -23;
 
     //human station
-    public static final double elevatorHs = -25;
-    public static final double pivotHs = 90;
+    public static final double elevatorHs = -26.3;
+    public static final double pivotHs = 93;
     //drivetrain encoder calculations
     public static final double wheelDiameter = 6; //inches
     public static final double wheelCircumference = wheelDiameter * Math.PI;
@@ -80,10 +80,10 @@ public final class Constants {
 
     public static final double pivotSpeedUp = -0.8;
     public static final double pivotSpeedDown = 0.6;
-    public static final double elevatorUp = -0.2; //-0.2
-    public static final double elevatorDown = 0.1; //0.1
+    public static final double elevatorUp = -0.4; //-0.2
+    public static final double elevatorDown = 0.15; //0.1
     
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
     // Marquee Commands
     // Scrolling commands: use later
     // public static final String team_message_blue = "Metuchen Momentum Team 7587|6|0|0|0|0|127|0|0|0\r\n";

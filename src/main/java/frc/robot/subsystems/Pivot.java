@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
-
 import static frc.robot.Constants.*;
+
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -10,14 +10,20 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Pivot extends SubsystemBase {
+public class pivot extends SubsystemBase {
+    
     private final CANSparkMax pivot;
+
     private final RelativeEncoder pivotEncoder;
 
-    public Pivot() {
+    public pivot() {
+
         pivot = new CANSparkMax(pivotPort, MotorType.kBrushless);
+
         pivot.setIdleMode(IdleMode.kBrake);
+
         pivotEncoder = pivot.getEncoder();
+
     }
 
     public void pivotUp() {

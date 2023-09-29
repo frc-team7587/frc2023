@@ -3,34 +3,36 @@ package frc.robot.commands.drivetrain;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.drivetrain;
 
-public class DriveStraight extends PIDCommand {
-    private final DriveTrain driveTrain;
+public class driveStraight extends PIDCommand {
+    
+    private final drivetrain m_drive;
     private final double target;
 
-    public DriveStraight(DriveTrain driveTrain, double distance, double current) {
+    public driveStraight(drivetrain m_drive, double distance, double current) {
         super(new PIDController(0.005, 0.001, 0),
-            () -> driveTrain.getAverageDistance(),
+        
+            () -> m_drive.getAverageDistance(),
             current + distance,
-            (output) -> driveTrain.drive(output, 0),
-            driveTrain);
+            (output) -> m_drive.drive(output, 0),
+            m_drive);
 
             // getController().enableContinuousInput(-180, 180);
             getController().setTolerance(1, 0);
 
-            this.driveTrain = driveTrain;
+            this.m_drive = m_drive;
             this.target = current + distance;
     }
 
     @Override
     public void initialize() {
-        // drive.resetEncoders();
+        // m_drive.resetEncoders();
     }
 
     @Override
     public boolean isFinished() {
-        return Robot.drive.getAverageDistance() >= target - 2 &&  Robot.drive.getAverageDistance() <= target + 2;
+        return Robot.m_drive.getAverageDistance() >= target - 2 &&  Robot.m_drive.getAverageDistance() <= target + 2;
     }
 
     @Override

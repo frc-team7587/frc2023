@@ -2,23 +2,23 @@ package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.drivetrain;
 
-public class DefaultDrive extends CommandBase {
-    private DriveTrain drive;
+public class defaultDrive extends CommandBase {
+    private drivetrain m_drive;
 
-    public DefaultDrive(DriveTrain subsystem) {
+    public defaultDrive(drivetrain subsystem) {
         addRequirements(subsystem);
-        drive = subsystem;
+        m_drive = subsystem;
     }
 
     @Override
     public void execute() {
-        drive.drive(Robot.joystick.getY() * Robot.joystick.getThrottle(), .6 * Robot.joystick.getTwist() * 0.85 * Robot.joystick.getThrottle());
+        m_drive.drive(Robot.logi.getY() * Robot.logi.getThrottle(), .6 * Robot.logi.getTwist() * 0.85 * Robot.logi.getThrottle());
     }
 
     @Override
     public void end(boolean interrupted) {
-        drive.drive(0, 0);
+        m_drive.drive(0, 0);
     }
 }

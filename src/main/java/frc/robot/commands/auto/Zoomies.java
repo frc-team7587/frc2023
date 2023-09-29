@@ -5,12 +5,12 @@
 // import frc.robot.commands.drivetrain.driveStraight;
 // import frc.robot.commands.drivetrain.driveTurn;
 
-// public class Zoomies extends SequentialCommandGroup{
-//     public Zoomies() {
+// public class zoomies extends SequentialCommandGroup{
+//     public zoomies() {
 //         addCommands(
-//             new driveStraight(Robot.m_drive, -60.69, Robot.m_drive.getAverageDistance()),
-//             new driveTurn(Robot.m_drive, -90, Robot.pos[0]),
-//             new driveStraight(Robot.m_drive, 60.69, Robot.m_drive.getAverageDistance()),
-//             new driveTurn(Robot.m_drive, 90, Robot.pos[0]));
+//         new driveStraight(Robot.m_drive, -60.69, Robot.m_drive.getAverageDistance()),
+//         new driveTurn(Robot.m_drive, -90, Robot.pos[0]),
+//         new driveStraight(Robot.m_drive, 60.69, Robot.m_drive.getAverageDistance()),
+//         new driveTurn(Robot.m_drive, 90, Robot.pos[0]));
 //     }
 // }

@@ -3,12 +3,13 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Robot;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.elevator;
 
-public class ElevatorGoTo extends PIDCommand {
+public class elevatorGoTo extends PIDCommand {
+
     private double target;
 
-    public ElevatorGoTo(Elevator subsystem, double target) {
+    public elevatorGoTo(elevator subsystem, double target) {
         super(new PIDController(0.04, 0, 0),
         () -> subsystem.getElevator(),
         target,
@@ -21,7 +22,7 @@ public class ElevatorGoTo extends PIDCommand {
 
     @Override
     public boolean isFinished() {
-        return Robot.elevator.getElevator() >= target - 3 && Robot.elevator.getElevator() <= target + 3;
+        return Robot.m_elevator.getElevator() >= target - 3 && Robot.m_elevator.getElevator() <= target + 3;
     }
     
 }

@@ -2,13 +2,13 @@ package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.arm;
 
 
-public class ArmOut extends CommandBase {
-    private final Arm arm;
+public class armOut extends CommandBase {
+    private final arm arm;
 
-    public ArmOut(Arm subsystem) {
+    public armOut(arm subsystem) {
         addRequirements(subsystem);
         arm = subsystem;
     }
@@ -21,5 +21,5 @@ public class ArmOut extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         arm.off();
-    }
+  }
 }

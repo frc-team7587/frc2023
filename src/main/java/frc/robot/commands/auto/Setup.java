@@ -13,8 +13,8 @@
 // import frc.robot.Constants;
 // import frc.robot.commands.elevator.*;
 
-// public class Setup extends SequentialCommandGroup {
-//     public Setup() {
+// public class setUp extends SequentialCommandGroup {
+//     public setUp() {
 //         addCommands(
 //         // new driveStraight(Robot.m_drive, 60.69, Robot.m_drive.getAverageDistance()),
 //         // new armOut(Robot.m_arm),
@@ -24,17 +24,17 @@
 //         // new pivotGoTo(Robot.m_pivot, 0.5),
 //         // new armIn(Robot.m_arm),
 //         // new armOut(Robot.m_arm));
-//         new elevatorGoTo(Robot.elevator, Constants.elevatorMid),
-//         new pivotGoTo(Robot.pivot, Constants.pivotMid),
-//         new armIn(Robot.arm),
-//         new intakeOut(Robot.intake),
-//         new driveStraight(Robot.drive, 70, Robot.drive.getAverageDistance()),
-//         new driveTurn(Robot.drive, 180, Robot.pos[0]),
-//         new pivotGoTo(Robot.pivot, Constants.pivotUpper),
-//         new intakeIn(Robot.intake),
+//         new elevatorGoTo(Robot.m_elevator, Constants.elevatorMid),
+//         new pivotGoTo(Robot.m_pivot, Constants.pivotMid),
+//         new armIn(Robot.m_arm),
+//         new intakeOut(Robot.m_intake),
+//         new driveStraight(Robot.m_drive, 70, Robot.m_drive.getAverageDistance()),
+//         new driveTurn(Robot.m_drive, 180, Robot.pos[0]),
+//         new pivotGoTo(Robot.m_pivot, Constants.pivotUpper),
+//         new intakeIn(Robot.m_intake),
 //         new reset(),
-//         new driveTurn(Robot.drive, 180, Robot.pos[0]),
-//         new driveStraight(Robot.drive, 70, Robot.drive.getAverageDistance())
+//         new driveTurn(Robot.m_drive, 180, Robot.pos[0]),
+//         new driveStraight(Robot.m_drive, 70, Robot.m_drive.getAverageDistance())
 
 //         );
 //     }

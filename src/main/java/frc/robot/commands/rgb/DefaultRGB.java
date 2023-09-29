@@ -1,13 +1,14 @@
 package frc.robot.commands.rgb;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.RGB;
+import frc.robot.subsystems.rgb;
 import frc.robot.Robot;
 
-public class DefaultRGB extends CommandBase {
-    private final RGB rgb;
+public class defaultRGB extends CommandBase{
+    
+    private final rgb rgb;
 
-    public DefaultRGB(RGB subsystem) {
+    public defaultRGB(rgb subsystem) {
         addRequirements(subsystem);
         rgb = subsystem;
     }
@@ -15,9 +16,9 @@ public class DefaultRGB extends CommandBase {
     @Override
     public void execute() {
         // if (Robot.m_teamColorChooser.getSelected() == "Blue") {
-        // rgb.setBlue();
+        //     rgb.setBlue();
         // } else if (Robot.m_teamColorChooser.getSelected() == "Red") {
-        // rgb.setRed();
+        //     rgb.setRed();
         // }
         rgb.setRed();
     }

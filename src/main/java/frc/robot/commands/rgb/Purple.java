@@ -2,11 +2,11 @@ package frc.robot.commands.rgb;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.RGB;
+import frc.robot.subsystems.rgb;
 
-public class Purple extends CommandBase{
-    private final RGB rgb;
-    public Purple(RGB subsystem) {
+public class purple extends CommandBase{
+    private final rgb rgb;
+    public purple(rgb subsystem) {
         addRequirements(subsystem);
         rgb = subsystem;
     }

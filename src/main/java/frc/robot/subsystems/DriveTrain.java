@@ -1,17 +1,16 @@
 package frc.robot.subsystems;
-
 import static frc.robot.Constants.*;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 
-public class DriveTrain extends SubsystemBase {
+
+public class drivetrain extends SubsystemBase {
+
     private final CANSparkMax leftFront;
     private final CANSparkMax leftRear;
     private final CANSparkMax rightFront;
@@ -27,7 +26,8 @@ public class DriveTrain extends SubsystemBase {
 
     private final DifferentialDrive drive;
 
-    public DriveTrain() {
+    public drivetrain() {
+
         leftFront = new CANSparkMax(LFront, MotorType.kBrushless);
         leftRear = new CANSparkMax(LRear, MotorType.kBrushless);
         rightFront = new CANSparkMax(RFront, MotorType.kBrushless);
@@ -51,21 +51,28 @@ public class DriveTrain extends SubsystemBase {
         right.setInverted(true);
 
         drive = new DifferentialDrive(left, right);
+
     }
 
     public void drive(double fwd, double rot) {
+
         this.drive.arcadeDrive(fwd, rot);
+    
     }
 
     public void resetEncoders() {
+
         leftFrontEncoder.setPosition(0);
         leftRearEncoder.setPosition(0);
         rightFrontEncoder.setPosition(0);
         rightRearEncoder.setPosition(0);
+
     }
 
     public int getLeftEncoder() {
+
         return (int) ((leftFrontEncoder.getPosition() + leftRearEncoder.getPosition()) / 2);
+
     }
 
     public int getRightEncoder() {
@@ -91,6 +98,6 @@ public class DriveTrain extends SubsystemBase {
 
     @Override
     public void periodic() {
-
+        
     }
 }
