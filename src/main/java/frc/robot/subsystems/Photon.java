@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
@@ -10,7 +9,7 @@ import static frc.robot.Constants.*;
 public class photon extends SubsystemBase {
     
     public static final PhotonCamera camera = new PhotonCamera(cameraName);
-    
+    public static final PhotonCamera cam1 = new PhotonCamera(cameraName);
 
     public void isConnected() {
         System.out.println("Camera connected: " + camera.isConnected());
