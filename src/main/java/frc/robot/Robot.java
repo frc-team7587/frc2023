@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Pop and Lock", "Pop and Lock");
     m_chooser.addOption("Jackpot", "Jackpot");
     m_chooser.addOption("Set Up", "Set Up");
-    m_chooser.addOption("Zoomies", "Zoomies");
+    //m_chooser.addOption("Zoomies", "Zoomies");
     SmartDashboard.putData(m_chooser);
 
     m_teamColorChooser.setDefaultOption("Blue", "Blue");
