@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
   public static final elevator m_elevator = new elevator();
   public static final pivot m_pivot = new pivot();
   public static final intake m_intake = new intake();
-  public static final photon photon = new photon();
+  // public static final photon photon = new photon();
 // public static final auto
   // public static final rgb m_underglow = new rgb(0, 300);
   // public static final rgb m_upperLeft = new rgb(1, 144);
@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Pop and Lock", "Pop and Lock");
     m_chooser.addOption("Jackpot", "Jackpot");
     m_chooser.addOption("Set Up", "Set Up");
-    //m_chooser.addOption("Zoomies", "Zoomies");
+    m_chooser.addOption("Zoomies", "Zoomies");
     SmartDashboard.putData(m_chooser);
 
     m_teamColorChooser.setDefaultOption("Blue", "Blue");
